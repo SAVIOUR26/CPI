@@ -19,6 +19,7 @@ $info = flash_get('info');
 <link rel="icon" type="image/png" href="<?= asset('img/favicon-32.png') ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
 </head>
 <body>
@@ -26,7 +27,8 @@ $info = flash_get('info');
   <div class="container bar">
     <a href="/" class="brand">
       <img src="<?= asset('img/logo.png') ?>" alt="CPI crest">
-      <span>Crawford Professionals Institute<small>Empowering Skills, Transforming Lives.</small></span>
+      <span class="brand-full">Crawford Professionals Institute<small>Empowering Skills, Transforming Lives.</small></span>
+      <span class="brand-short">CPI</span>
     </a>
     <nav class="main-nav">
       <a href="/professional-training">Professional Training</a>
@@ -45,7 +47,7 @@ $info = flash_get('info');
         </form>
       <?php else: ?>
         <a href="/login" class="btn btn-outline btn-sm">Login</a>
-        <a href="/register" class="btn btn-primary btn-sm">Register</a>
+        <a href="/register" class="btn btn-primary btn-sm">Register <i class="fa-solid fa-arrow-right"></i></a>
       <?php endif; ?>
     </div>
   </div>
@@ -62,24 +64,24 @@ $info = flash_get('info');
   <div class="container">
     <div class="footer-grid">
       <div>
-        <h4>Crawford Professionals Institute</h4>
+        <h4><i class="fa-solid fa-building-columns"></i> Crawford Professionals Institute</h4>
         <p style="color:#a39c8f">CRAWFORD PROFESSIONALS INSTITUTE (CPI) LIMITED. Empowering Skills, Transforming Lives.</p>
       </div>
       <div>
-        <h4>Programmes</h4>
+        <h4><i class="fa-solid fa-graduation-cap"></i> Programmes</h4>
         <p><a href="/professional-training">Professional Training</a></p>
         <p><a href="/capacity-building">Capacity Building</a></p>
         <p><a href="/corporate-training">Corporate Training</a></p>
       </div>
       <div>
-        <h4>Resources</h4>
+        <h4><i class="fa-solid fa-book-open"></i> Resources</h4>
         <p><a href="/courses">Course Catalogue</a></p>
         <p><a href="/verify">Verify a Certificate</a></p>
         <p><a href="/corporate/request">Request Corporate Training</a></p>
       </div>
       <div>
-        <h4>Contact</h4>
-        <p>info@crawfordinstitute.online</p>
+        <h4><i class="fa-solid fa-address-card"></i> Contact</h4>
+        <p class="contact-line"><i class="fa-solid fa-envelope"></i> info@crawfordinstitute.online</p>
         <p><a href="/contact">Contact form</a></p>
       </div>
     </div>
