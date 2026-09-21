@@ -1,0 +1,39 @@
+name: Deploy to cPanel via FTP
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # server-dir is "./" (repo root, including public/) rather than just
+      # public/, because this FTP account's home directory IS public_html —
+      # the root .htaccess (see CLAUDE.md) is what rewrites into public/ and
+      # blocks direct access to app/, database/, vendor/, .env, etc. in that
+      # layout, since Document Root can't be repointed on this hosting plan.
+      #
+      # .env is deliberately excluded and never generated here — it's
+      # created and edited by hand in cPanel File Manager at the site root,
+      # so a redeploy must never touch it. dangerous-clean-slate stays at
+      # its default (false), so the action doesn't delete server-only files
+      # like .env or anything under storage/uploads/ that it never uploaded.
+      - name: Deploy over FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/.env
