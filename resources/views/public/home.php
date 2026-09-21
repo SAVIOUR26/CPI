@@ -8,15 +8,26 @@
       <p class="lead">Practical professional training, capacity building for institutions, and corporate training
         delivered directly to your organization — from a Kampala-based institute built for African professionals.</p>
       <div class="hero-actions">
-        <a href="/courses" class="btn btn-primary">Browse Courses</a>
+        <a href="/courses" class="btn btn-primary">Browse Courses <i class="fa-solid fa-arrow-right"></i></a>
         <a href="/corporate-training" class="btn btn-outline">Corporate Training</a>
       </div>
       <div style="margin-top:24px">
-        <span class="hero-badge">✓ Certificates verifiable online</span>
+        <span class="hero-badge"><i class="fa-solid fa-circle-check"></i> Certificates verifiable online</span>
       </div>
     </div>
-    <div>
-      <img src="<?= asset('img/logo.png') ?>" alt="Crawford Professionals Institute crest" style="max-width:280px;margin:0 auto">
+    <div class="hero-panel">
+      <div class="hero-stat">
+        <span class="icon-badge" style="margin-bottom:0"><i class="fa-solid fa-graduation-cap"></i></span>
+        <div><strong>184 Courses</strong><span>Across professional &amp; corporate tracks</span></div>
+      </div>
+      <div class="hero-stat">
+        <span class="icon-badge" style="margin-bottom:0"><i class="fa-solid fa-certificate"></i></span>
+        <div><strong>Verified Certificates</strong><span>QR-checked at /verify</span></div>
+      </div>
+      <div class="hero-stat">
+        <span class="icon-badge" style="margin-bottom:0"><i class="fa-solid fa-building"></i></span>
+        <div><strong>Corporate-Ready</strong><span>Training delivered to your team</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -37,6 +48,11 @@
   </div>
 </section>
 
+<?php $pillarIcons = [
+  'professional-training' => 'fa-user-graduate',
+  'capacity-building' => 'fa-people-group',
+  'corporate-training' => 'fa-building',
+]; ?>
 <section class="section">
   <div class="container">
     <p class="eyebrow">What we offer</p>
@@ -44,9 +60,10 @@
     <div class="grid-3" style="margin-top:28px">
       <?php foreach ($pillars as $p): ?>
         <a href="/<?= e($p['slug']) ?>" class="card pillar-card">
+          <span class="icon-badge"><i class="fa-solid <?= e($pillarIcons[$p['slug']] ?? 'fa-star') ?>"></i></span>
           <h3><?= e($p['name']) ?></h3>
           <p><?= e($p['description']) ?></p>
-          <span style="font-weight:700;color:var(--crimson)">Explore &rarr;</span>
+          <span style="font-weight:700;color:var(--crimson)">Explore <i class="fa-solid fa-arrow-right"></i></span>
         </a>
       <?php endforeach; ?>
     </div>
@@ -78,8 +95,9 @@
 
 <section class="section">
   <div class="container" style="text-align:center">
+    <span class="icon-badge" style="margin-bottom:16px"><i class="fa-solid fa-handshake"></i></span>
     <h2>Training your team? We come to you.</h2>
-    <p class="lead">Request customized training for your organization — health, business, technology or a topic you name.</p>
-    <a href="/corporate/request" class="btn btn-primary">Request Corporate Training</a>
+    <p class="lead" style="max-width:560px;margin-left:auto;margin-right:auto">Request customized training for your organization — health, business, technology or a topic you name.</p>
+    <a href="/corporate/request" class="btn btn-primary">Request Corporate Training <i class="fa-solid fa-arrow-right"></i></a>
   </div>
 </section>
