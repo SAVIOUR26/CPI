@@ -1,0 +1,13 @@
+# This file only matters if the hosting account's Document Root could NOT be
+# set to the `public/` folder (see README/CLAUDE.md — setting the Document
+# Root to `public/` in cPanel is the supported, tested deployment method).
+# This is a best-effort fallback for that case and should be verified on the
+# live server before relying on it.
+
+RewriteEngine On
+
+# Never allow direct access to anything outside public/.
+RewriteRule ^(app|config|database|storage|routes|vendor|docs|\.env|\.git)($|/) - [F,L]
+
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [PT,L]

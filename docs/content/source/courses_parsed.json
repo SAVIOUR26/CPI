@@ -1,0 +1,1842 @@
+[
+  {
+    "source": "short_courses",
+    "title": "Artificial Intelligence for Professionals",
+    "category_raw": "ICT & AI",
+    "duration": "2 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Prompt Engineering for Business",
+    "category_raw": "ICT & AI",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Generative AI for Productivity",
+    "category_raw": "ICT & AI",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Data Analytics with Power BI",
+    "category_raw": "ICT & AI",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Project Planning and Management",
+    "category_raw": "Project Management",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Project Monitoring and Evaluation (M&E)",
+    "category_raw": "Project Management",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Proposal Writing and Grant Management",
+    "category_raw": "Project Management",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Monitoring and Evaluation (M&E)",
+    "category_raw": "MEAL",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "SPSS for Data Analysis",
+    "category_raw": "MEAL",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "STATA for Data Analysis",
+    "category_raw": "MEAL",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Public Health Leadership",
+    "category_raw": "Public Health",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Health Information Systems (HMIS & DHIS2)",
+    "category_raw": "Public Health",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Occupational Health and Safety",
+    "category_raw": "Public Health",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Procurement and Contract Management",
+    "category_raw": "Procurement",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Supply Chain Management",
+    "category_raw": "Procurement",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Financial Management",
+    "category_raw": "Finance",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Budgeting and Budgetary Control",
+    "category_raw": "Finance",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Accounting with QuickBooks",
+    "category_raw": "Finance",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Strategic Leadership",
+    "category_raw": "Leadership",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Executive Leadership",
+    "category_raw": "Leadership",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Strategic Human Resource Management",
+    "category_raw": "Human Resource",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Recruitment and Selection",
+    "category_raw": "Human Resource",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Entrepreneurship and Business Development",
+    "category_raw": "Business",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Business Plan Development",
+    "category_raw": "Business",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Computer Applications",
+    "category_raw": "ICT",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Advanced Microsoft Office",
+    "category_raw": "ICT",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Networking Essentials",
+    "category_raw": "ICT",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Cloud Computing",
+    "category_raw": "ICT",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Website Development",
+    "category_raw": "ICT",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Graphic Design",
+    "category_raw": "ICT",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Public Administration",
+    "category_raw": "Governance",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Records and Information Management",
+    "category_raw": "Governance",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Office Administration",
+    "category_raw": "Governance",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Report Writing",
+    "category_raw": "Governance",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Climate Change Adaptation",
+    "category_raw": "Environment",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Environmental Impact Assessment (EIA)",
+    "category_raw": "Environment",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Agribusiness Management",
+    "category_raw": "Environment",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Food Safety Management",
+    "category_raw": "Environment",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Anti-Money Laundering (AML)",
+    "category_raw": "Specialized",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Anti-Corruption and Ethics",
+    "category_raw": "Specialized",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Disaster Risk Management",
+    "category_raw": "Specialized",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Gender Mainstreaming",
+    "category_raw": "Specialized",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Executive Secretarial Skills",
+    "category_raw": "Specialized",
+    "duration": "2 Months",
+    "fee_ugx": 350000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Fleet Management",
+    "category_raw": "Specialized",
+    "duration": "2.5 Months",
+    "fee_ugx": 450000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "Facility Management",
+    "category_raw": "Specialized",
+    "duration": "3 Months",
+    "fee_ugx": 500000,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "German Language",
+    "category_raw": "Language",
+    "duration": "2 Months",
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "short_courses",
+    "title": "French",
+    "category_raw": null,
+    "duration": "2 Months",
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Professional Certificate",
+    "programme_type": "short_course"
+  },
+  {
+    "source": "more_courses",
+    "title": "Project Cycle Management",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Project Monitoring, Evaluation and Learning (PMEL)",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Results-Based Project Management",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Agile Project Management",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "PRINCE2 Foundation",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "PMP Examination Preparation",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Managing Development Projects",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Stakeholder Engagement and Management",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Project Risk Management",
+    "category_raw": "Project Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Results-Based Monitoring and Evaluation",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Advanced Monitoring and Evaluation",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Data Collection and Analysis using SPSS",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Data Analysis using STATA",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Data Visualization using Power BI",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "KoboToolbox for Data Collection",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "DHIS2 Data Management",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Survey Design and Data Quality Assurance",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "MEAL Systems Development",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Impact Evaluation Techniques",
+    "category_raw": "MEAL",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Public Health Leadership and Management",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Epidemiology and Disease Surveillance",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Health Information Systems (HMIS/DHIS2)",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Health Care Quality Improvement",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Infection Prevention and Control (IPC)",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Reproductive, Maternal, Newborn and Child Health",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Health Promotion and Disease Prevention",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Nutrition Programme Management",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Health Research Methods",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Healthcare Monitoring and Evaluation",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Hospital Administration and Management",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Digital Health and Telemedicine",
+    "category_raw": "Public Health & Healthcare Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "AI in Healthcare",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Machine Learning Fundamentals",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Data Science with Python",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Intelligence using Power BI",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Microsoft Excel (Basic to Advanced)",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "SQL Database Management",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Cloud Computing Essentials",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Cybersecurity Risk Management",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Ethical Hacking Fundamentals",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Digital Transformation Strategy",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "IT Project Management",
+    "category_raw": "Information Technology & Artificial Intelligence",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Strategic Management",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Development and Growth Strategies",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Entrepreneurship and Innovation",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Process Improvement",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Corporate Strategy and Planning",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Customer Relationship Management (CRM)",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Change Management",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Analytics",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Continuity Management",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Organizational Development",
+    "category_raw": "Business Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Executive Leadership Programme",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Strategic Leadership and Decision Making",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Emotional Intelligence for Leaders",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Transformational Leadership",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Executive Coaching and Mentoring",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Conflict Resolution and Negotiation",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Leading High-Performance Teams",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Change Leadership",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Strategic Communication for Executives",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Women in Leadership",
+    "category_raw": "Leadership & Executive Development",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "IPSAS",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "IFRS",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Financial Statement Analysis",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Internal Audit Best Practices",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Forensic Accounting",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Tax Administration and Compliance",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Budget Preparation and Financial Planning",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Cost Accounting",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Fraud Risk Management",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Treasury Operations",
+    "category_raw": "Accounting, Audit & Taxation",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Enterprise Risk Management",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Internal Control Systems",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Corporate Governance",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Counter Terrorism Financing (CTF)",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Compliance Management Systems",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Anti-Corruption Strategies",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Ethics",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Governance in Public Institutions",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Regulatory Compliance",
+    "category_raw": "Governance, Risk & Compliance",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Strategic Procurement Management",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Contract Management",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "International Procurement",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Supply Chain Analytics",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Warehouse and Inventory Management",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Fleet and Transport Management",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Customs Procedures and Trade Facilitation",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Procurement Fraud Prevention",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "E-Procurement Systems",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Logistics Performance Management",
+    "category_raw": "Procurement, Logistics & Supply Chain",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Performance Management Systems",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Employee Engagement",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Talent Acquisition",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Learning and Development",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Compensation and Benefits",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "HR Analytics",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Labour Laws and Industrial Relations",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Payroll Management",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Succession Planning",
+    "category_raw": "Human Resource Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Sustainable Agriculture",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Food Security and Nutrition",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Water Resource Management",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Waste Management",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Climate-Smart Agriculture",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Environmental Monitoring",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Renewable Energy Management",
+    "category_raw": "Agriculture & Environmental Management",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Curriculum Development",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Competency-Based Education and Training (CBET)",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Instructional Design",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Adult Learning Methodologies",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Assessment and Evaluation Techniques",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "E-Learning Development",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Teaching with Digital Technologies",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Academic Leadership",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "School Administration",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Education Quality Assurance",
+    "category_raw": "Education & Training",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Professional Report Writing",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Business Communication Skills",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Public Speaking and Presentation Skills",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Customer Service Excellence",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Negotiation Skills",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Time Management",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Problem Solving and Decision Making",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Emotional Intelligence",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Workplace Ethics",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Professional Etiquette",
+    "category_raw": "Communication & Soft Skills",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Public Policy Analysis",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Legislative Drafting",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Administrative Law",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Contract Law for Managers",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Labour Law",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Data Protection and Privacy",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Public Sector Governance",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Public Financial Management",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Election Management",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  },
+  {
+    "source": "more_courses",
+    "title": "Human Rights and Governance",
+    "category_raw": "Legal & Public Policy",
+    "duration": null,
+    "fee_ugx": null,
+    "venue": null,
+    "award": "Certificate of Completion",
+    "programme_type": "corporate"
+  }
+]
