@@ -30,25 +30,30 @@ $info = flash_get('info');
       <span class="brand-full">Crawford Professionals Institute<small>Empowering Skills, Transforming Lives.</small></span>
       <span class="brand-short">CPI</span>
     </a>
-    <nav class="main-nav">
-      <a href="/professional-training">Professional Training</a>
-      <a href="/capacity-building">Capacity Building</a>
-      <a href="/corporate-training">Corporate Training</a>
-      <a href="/courses">Courses</a>
-      <a href="/verify">Verify Certificate</a>
-      <a href="/about">About</a>
-    </nav>
-    <div class="nav-actions">
-      <?php if (Auth::check()): ?>
-        <a href="<?= Auth::homeFor($auth_roles ?? []) ?>" class="btn btn-outline btn-sm">My Dashboard</a>
-        <form action="/logout" method="post" style="display:inline">
-          <?= csrf_field() ?>
-          <button type="submit" class="btn btn-primary btn-sm">Logout</button>
-        </form>
-      <?php else: ?>
-        <a href="/login" class="btn btn-outline btn-sm">Login</a>
-        <a href="/register" class="btn btn-primary btn-sm">Register <i class="fa-solid fa-arrow-right"></i></a>
-      <?php endif; ?>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-collapse" aria-label="Open menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="nav-collapse" id="nav-collapse">
+      <nav class="main-nav">
+        <a href="/professional-training">Professional Training</a>
+        <a href="/capacity-building">Capacity Building</a>
+        <a href="/corporate-training">Corporate Training</a>
+        <a href="/courses">Courses</a>
+        <a href="/verify">Verify Certificate</a>
+        <a href="/about">About</a>
+      </nav>
+      <div class="nav-actions">
+        <?php if (Auth::check()): ?>
+          <a href="<?= Auth::homeFor($auth_roles ?? []) ?>" class="btn btn-outline btn-sm">My Dashboard</a>
+          <form action="/logout" method="post" style="display:inline">
+            <?= csrf_field() ?>
+            <button type="submit" class="btn btn-primary btn-sm">Logout</button>
+          </form>
+        <?php else: ?>
+          <a href="/login" class="btn btn-outline btn-sm">Login</a>
+          <a href="/register" class="btn btn-primary btn-sm">Register <i class="fa-solid fa-arrow-right"></i></a>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 </header>
@@ -91,5 +96,6 @@ $info = flash_get('info');
     </div>
   </div>
 </footer>
+<script src="<?= asset('js/app.js') ?>" defer></script>
 </body>
 </html>
