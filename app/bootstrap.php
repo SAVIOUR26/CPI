@@ -46,3 +46,5 @@ set_exception_handler(function (Throwable $e) use ($debug) {
 });
 
 Session::start();
+
+\App\Core\Migrator::run();

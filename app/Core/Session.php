@@ -4,6 +4,9 @@ namespace App\Core;
 
 class Session
 {
+    /** Input flashed by the previous request; kept for this request only. */
+    private static ?array $old = null;
+
     public static function start(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
@@ -16,6 +19,10 @@ class Session
             ]);
             session_name('cpi_session');
             session_start();
+        }
+        if (self::$old === null) {
+            self::$old = $_SESSION['_old'] ?? [];
+            unset($_SESSION['_old']);
         }
     }
 
@@ -46,18 +53,21 @@ class Session
         return $value;
     }
 
+    /** Re-fills forms on the next request only (secrets are never kept). */
     public static function flashInput(array $input): void
     {
+        unset($input['_csrf'], $input['password'], $input['password_confirmation'], $input['current_password']);
         $_SESSION['_old'] = $input;
     }
 
     public static function old(string $key, mixed $default = ''): mixed
     {
-        return $_SESSION['_old'][$key] ?? $default;
+        return self::$old[$key] ?? $default;
     }
 
     public static function clearOld(): void
     {
+        self::$old = [];
         unset($_SESSION['_old']);
     }
 

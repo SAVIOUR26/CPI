@@ -4,6 +4,7 @@
 /** @var array $categories */
 /** @var int $courseCount */
 /** @var array $featured */
+/** @var array $academicCounts */ /** @var array $academicLevels */
 $floatingIcons = [
   ['fa-graduation-cap', '4%', '26s', '-2s', '1.9rem', '', '.14'],
   ['fa-book-open', '12%', '32s', '-18s', '1.3rem', 'gold', '.2'],
@@ -128,6 +129,37 @@ $heroChips = array_slice($heroChips, 0, 4);
     </div>
   </div>
 </section>
+
+<?php if ($academicCounts): ?>
+<section class="section section-tight">
+  <div class="container">
+    <div class="academic-feature" data-reveal>
+      <div class="af-copy">
+        <p class="eyebrow">Academic programmes</p>
+        <h2>Certificate, Diploma &amp; Degree programmes</h2>
+        <p>Through CPI's academic partnerships with recognized universities in Uganda, study for a university-awarded qualification while
+          building the practical skills employers value — with a clear path from Certificate to Diploma to Degree.</p>
+        <div class="hero-actions">
+          <a href="/academic" class="btn btn-gold"><i class="fa-solid fa-building-columns"></i> Explore academic programmes</a>
+          <a href="/academic#how-to-apply" class="btn btn-ghost-light">How to apply</a>
+        </div>
+        <p class="af-note"><i class="fa-regular fa-calendar"></i> Intakes in January, May, August and October · day, evening, weekend and online study</p>
+        <i class="fa-solid fa-graduation-cap deco" aria-hidden="true"></i>
+      </div>
+      <div class="af-levels">
+        <?php foreach (['certificate', 'diploma', 'degree', 'postgraduate'] as $key): ?>
+          <?php if (empty($academicCounts[$key])) continue; ?>
+          <a href="/academic#level-<?= $key ?>" class="progression-step">
+            <span class="ps-icon"><i class="fa-solid <?= e($academicLevels[$key]['icon']) ?>"></i></span>
+            <span><strong><?= e($academicLevels[$key]['plural']) ?></strong><small><?= (int) $academicCounts[$key] ?> programme<?= (int) $academicCounts[$key] === 1 ? '' : 's' ?> · apply online</small></span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
 
 <section class="section section-soft">
   <div class="container">

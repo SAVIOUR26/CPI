@@ -1,9 +1,11 @@
 # Crawford Professionals Institute (CPI) — Web Platform
 
 Public website, corporate training catalogue/request pipeline, and three portals
-(Learner, Lecturer, Admin) plus a private, unlisted Academic System for
-certificate/diploma/degree programmes — for **Crawford Professionals Institute
-Limited**, Kampala, Uganda. Production domain: `crawfordinstitute.online`.
+(Learner, Lecturer, Admin) plus an Academic System for Certificate, Diploma
+and Degree programmes offered with partner universities (public programme
+pages, online applications with document uploads, admissions review) — for
+**Crawford Professionals Institute Limited**, Kampala, Uganda. Production
+domain: `crawfordinstitute.online`.
 
 Built as a small, dependency-free PHP MVC application — no Composer, no
 build step. Everything the app needs at runtime is either PHP's standard

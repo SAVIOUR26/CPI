@@ -28,6 +28,8 @@ class Database
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES => false,
                 ]);
+                // Keep NOW()/CURRENT_TIMESTAMP in the app's timezone (APP_TIMEZONE), not the database server's.
+                self::$instance->exec("SET time_zone = '" . date('P') . "'");
             } catch (PDOException $e) {
                 if (Env::get('APP_DEBUG', false)) {
                     throw $e;
