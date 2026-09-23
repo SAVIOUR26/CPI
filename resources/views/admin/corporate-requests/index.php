@@ -9,7 +9,7 @@
         <td><?= e($r['organization_name']) ?></td>
         <td><?= e($r['topic']) ?></td>
         <td><?= e((string) ($r['headcount'] ?? '—')) ?></td>
-        <td><span class="status status-<?= e($r['status']) ?>"><?= e($r['status']) ?></span></td>
+        <td><span class="status status-<?= e($r['status']) ?>"><?= e(str_replace('_', ' ', $r['status'])) ?></span></td>
         <td><a href="/admin/corporate-requests/<?= (int) $r['id'] ?>" class="btn btn-sm btn-outline">View</a></td>
       </tr>
     <?php endforeach; ?>

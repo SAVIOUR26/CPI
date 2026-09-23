@@ -17,7 +17,7 @@
           <td><input class="rosterCk" type="checkbox" name="user_ids[]" value="<?= (int) $r['id'] ?>" <?= $r['status']==='active' ? '' : 'disabled' ?>></td>
           <td><?= e($r['full_name']) ?></td>
           <td><?= e($r['email']) ?></td>
-          <td><span class="status status-<?= e($r['status']) ?>"><?= e($r['status']) ?></span></td>
+          <td><span class="status status-<?= e($r['status']) ?>"><?= e(str_replace('_', ' ', $r['status'])) ?></span></td>
         </tr>
       <?php endforeach; ?>
       <?php if (!$roster): ?><tr><td colspan="4">No enrolled learners.</td></tr><?php endif; ?>

@@ -1,9 +1,15 @@
 <?php /** @var array $courses */ ?>
+<?php \App\Core\View::partial('partials.page-hero', [
+  'eyebrow' => 'Corporate training',
+  'title' => 'Request training for your organization',
+  'lead' => 'Tell us what your team needs and we\'ll come back with a tailored proposal and quote.',
+  'crumbs' => [['label' => 'Corporate Training', 'href' => '/corporate-training'], ['label' => 'Request']],
+  'stats' => [['icon' => 'fa-people-group', 'text' => 'Any group size'], ['icon' => 'fa-house-laptop', 'text' => 'In-person, online or hybrid'], ['icon' => 'fa-file-invoice', 'text' => 'Free proposal & quote']],
+]); ?>
 <section class="section">
   <div class="container">
     <div class="form-card wide">
-      <p class="eyebrow">Corporate Training</p>
-      <h1>Request Training for Your Organization</h1>
+      <h2 style="font-size:1.5rem">Your training request</h2>
       <p>Tell us what you need — "train our 50 staff in M&amp;E" or "leadership training for our district health
         team" — and our team will get back to you with a proposal.</p>
 

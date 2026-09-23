@@ -23,7 +23,7 @@
             <button type="submit" class="btn btn-sm btn-outline">Save</button>
           </form>
         </td>
-        <td><span class="status status-<?= $u['status']==='active' ? 'active' : 'cancelled' ?>"><?= e($u['status']) ?></span></td>
+        <td><span class="status status-<?= $u['status']==='active' ? 'active' : 'cancelled' ?>"><?= e(str_replace('_', ' ', $u['status'])) ?></span></td>
         <td>
           <form method="post" action="/admin/users/<?= (int) $u['id'] ?>/status">
             <?= csrf_field() ?>

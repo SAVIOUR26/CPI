@@ -12,7 +12,7 @@
         <td><?= e($c['title']) ?></td>
         <td><?= e($c['category_name'] ?? '—') ?></td>
         <td><?= e(str_replace('_',' ',$c['programme_type'])) ?></td>
-        <td><span class="status status-<?= e($c['status']) ?>"><?= e($c['status']) ?></span></td>
+        <td><span class="status status-<?= e($c['status']) ?>"><?= e(str_replace('_', ' ', $c['status'])) ?></span></td>
         <td><?= $c['is_public'] ? 'Yes' : 'No' ?></td>
         <td><a href="/admin/courses/<?= (int) $c['id'] ?>" class="btn btn-sm btn-outline">Manage</a></td>
       </tr>

@@ -16,9 +16,10 @@ class Course extends Model
     public static function publishedForPillar(string $pillarSlug): array
     {
         return static::query(
-            'SELECT c.* FROM courses c
+            'SELECT c.*, cat.name AS category_name, cat.slug AS category_slug FROM courses c
              JOIN course_pillars cp ON cp.course_id = c.id
              JOIN pillars p ON p.id = cp.pillar_id
+             LEFT JOIN course_categories cat ON cat.id = c.category_id
              WHERE p.slug = ? AND c.status = "published" AND c.is_public = 1
              ORDER BY c.title',
             [$pillarSlug]
@@ -27,7 +28,7 @@ class Course extends Model
 
     public static function catalogue(?string $categorySlug = null, ?string $search = null): array
     {
-        $sql = 'SELECT c.*, cat.name AS category_name FROM courses c
+        $sql = 'SELECT c.*, cat.name AS category_name, cat.slug AS category_slug FROM courses c
                 LEFT JOIN course_categories cat ON cat.id = c.category_id
                 WHERE c.status = "published" AND c.is_public = 1';
         $params = [];

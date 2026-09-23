@@ -9,7 +9,7 @@
       <tr>
         <td><?= e($p['title']) ?></td>
         <td><?= e(ucfirst($p['award_level'])) ?></td>
-        <td><span class="status status-<?= e($p['status']) ?>"><?= e($p['status']) ?></span></td>
+        <td><span class="status status-<?= e($p['status']) ?>"><?= e(str_replace('_', ' ', $p['status'])) ?></span></td>
         <td><a href="/academic/apply/<?= (int) $p['id'] ?>" target="_blank">/academic/apply/<?= (int) $p['id'] ?></a></td>
       </tr>
     <?php endforeach; ?>
