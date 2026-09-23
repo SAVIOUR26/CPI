@@ -57,10 +57,12 @@ $router->get('/corporate/portal', [CorporatePortal::class, 'index']);
 $router->get('/corporate/portal/cohorts', [CorporatePortal::class, 'cohorts']);
 $router->get('/corporate/portal/invoices', [CorporatePortal::class, 'invoices']);
 
-// ── Private academic system (unlisted, direct-link only) ───────────────
+// ── Academic programmes (certificate / diploma / degree via university partners) ──
 $router->get('/academic', [AcademicGateway::class, 'index']);
+$router->get('/academic/programmes/{programme}', [AcademicGateway::class, 'show']);
 $router->get('/academic/apply/{programme}', [AcademicGateway::class, 'showApply']);
 $router->post('/academic/apply/{programme}', [AcademicGateway::class, 'submitApply']);
+$router->get('/academic/application-received', [AcademicGateway::class, 'received']);
 
 // ── Admin portal ─────────────────────────────────────────────────────────
 $router->get('/admin', [AdminDashboard::class, 'index']);
@@ -98,9 +100,13 @@ $router->post('/admin/certificates/{certificate}/revoke', [AdminCertificate::cla
 
 $router->get('/admin/academic/programmes', [AdminAcademic::class, 'programmes']);
 $router->post('/admin/academic/programmes', [AdminAcademic::class, 'createProgramme']);
+$router->get('/admin/academic/programmes/create', [AdminAcademic::class, 'newProgramme']);
+$router->get('/admin/academic/programmes/{programme}', [AdminAcademic::class, 'editProgramme']);
+$router->post('/admin/academic/programmes/{programme}', [AdminAcademic::class, 'updateProgramme']);
 $router->get('/admin/academic/applications', [AdminAcademic::class, 'applications']);
 $router->get('/admin/academic/applications/{application}', [AdminAcademic::class, 'showApplication']);
 $router->get('/admin/academic/applications/{application}/documents', [AdminAcademic::class, 'applicationDocuments']);
+$router->get('/admin/academic/applications/{application}/files/{key}', [AdminAcademic::class, 'applicationFile']);
 $router->post('/admin/academic/applications/{application}/decide', [AdminAcademic::class, 'decide']);
 $router->post('/admin/academic/fees', [AdminAcademic::class, 'addFee']);
 $router->post('/admin/academic/timetable', [AdminAcademic::class, 'addTimetableEntry']);

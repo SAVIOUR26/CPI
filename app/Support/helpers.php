@@ -90,6 +90,19 @@ if (!function_exists('date_pretty')) {
     }
 }
 
+if (!function_exists('old_input')) {
+    /** Old input by dot path, for nested field names: old_input('personal.surname'). */
+    function old_input(string $path, string $default = ''): string
+    {
+        $keys = explode('.', $path);
+        $value = Session::old(array_shift($keys), null);
+        foreach ($keys as $key) {
+            $value = is_array($value) ? ($value[$key] ?? null) : null;
+        }
+        return is_scalar($value) ? (string) $value : $default;
+    }
+}
+
 if (!function_exists('course_price')) {
     /** Courses without a price are quoted on request (typically corporate/custom programmes). */
     function course_price(array $course): string

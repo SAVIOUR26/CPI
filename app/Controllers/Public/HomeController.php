@@ -4,6 +4,7 @@ namespace App\Controllers\Public;
 
 use App\Core\Controller;
 use App\Core\Request;
+use App\Models\AcademicProgramme;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Pillar;
@@ -43,6 +44,14 @@ class HomeController extends Controller
             $pillarCounts[(int) $row['pillar_id']] = (int) $row['n'];
         }
 
+        try {
+            $academic = AcademicProgramme::published();
+        } catch (\PDOException $e) {
+            // e.g. a database migration that has not applied yet — never take the homepage down for it.
+            error_log('Homepage academic section skipped: ' . $e->getMessage());
+            $academic = [];
+        }
+
         $this->view('public.home', [
             'pageTitle' => 'Crawford Professionals Institute (CPI) — Empowering Skills, Transforming Lives.',
             'pillars' => $pillars,
@@ -50,6 +59,8 @@ class HomeController extends Controller
             'categories' => $categories,
             'courseCount' => count($catalogue),
             'featured' => $featured,
+            'academicCounts' => array_map('count', AcademicProgramme::grouped($academic)),
+            'academicLevels' => AcademicProgramme::levels(),
         ]);
     }
 

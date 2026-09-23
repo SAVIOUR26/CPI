@@ -1,8 +1,8 @@
 # Client-supplied content
 
-Raw source materials the client (Saviour Najuna / CPI) supplied on
-2026-09-20, kept here for provenance and future re-use, plus a record of
-where each one ended up in the app.
+Raw source materials the client (Saviour Najuna / CPI) supplied, kept here
+for provenance and future re-use, plus a record of where each one ended up
+in the app.
 
 ## Source files (`source/`)
 
@@ -44,6 +44,21 @@ php database/tools/import_courses.php path/to/new_courses.json database/seed_cou
 ```
 It's idempotent (`ON DUPLICATE KEY UPDATE`), so re-running it against a
 live database updates existing rows by slug rather than duplicating them.
+
+## Academic system (`academic/`, supplied 2026-09-23)
+
+| File | Used for |
+|---|---|
+| `ACADEMIC SYSTEM.pdf` | `resources/views/academic/index.php` (public `/academic` page: intro, academic progression, why choose CPI, learning journey, who can apply, how to apply, partner universities, CPI's role, student/lecturer portals, important information) and the per-level descriptions and "suitable for" lists in `App\Models\AcademicProgramme::levels()` |
+| `CRAWFORD PROFESSIONALS INSTITUTE ACADEMIC PROGRAMMES.pdf` | The 19 programmes (7 Certificates, 7 Diplomas, 5 Bachelor's Degrees), seeded by `database/migrations/002_seed_academic_programmes.sql`, with TEAM University, Uganda as the examining & awarding body (the only body this document names) |
+| `cpi_online_application_form.html` | The online application form (`resources/views/academic/apply.php`, `App\Controllers\Academic\GatewayController`): programme/intake/study session, personal details, sponsors, UACE & UCE results, other qualifications, document uploads and the declaration. The mock-up's "programme catalogue" step is dropped because applicants start from a programme page. Styled in the site's own colours rather than the mock-up's navy |
+
+What the documents did **not** include, so the site doesn't invent it:
+programme durations, entry requirements and fees. Pages show these only
+once an admin fills them in (Admin → Academic → Programmes → Edit);
+until then they say Admissions confirms them. `ACADEMIC SYSTEM.pdf` also
+names Victoria University Uganda as a partner — set the awarding body per
+programme if any programme is awarded by it rather than TEAM University.
 
 ## Note on `.docm`
 

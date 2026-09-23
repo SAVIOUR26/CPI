@@ -12,7 +12,7 @@ $info = flash_get('info');
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $isActive = fn (string $prefix): bool => $prefix === '/' ? $path === '/' : ($path === $prefix || str_starts_with($path, $prefix . '/'));
-$programmeActive = $isActive('/professional-training') || $isActive('/capacity-building') || $isActive('/corporate-training');
+$programmeActive = $isActive('/professional-training') || $isActive('/capacity-building') || $isActive('/corporate-training') || $isActive('/academic');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +86,10 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
               <span class="dd-icon"><i class="fa-solid fa-building"></i></span>
               <span><strong>Corporate Training</strong><small>Customized training delivered to your organization.</small></span>
             </a>
+            <a href="/academic" class="dropdown-item">
+              <span class="dd-icon"><i class="fa-solid fa-building-columns"></i></span>
+              <span><strong>Academic Programmes</strong><small>Certificate, Diploma &amp; Degree programmes with partner universities.</small></span>
+            </a>
             <div class="dropdown-foot">
               <span>Looking for something specific?</span>
               <a href="/courses" class="link-arrow">All courses <i class="fa-solid fa-arrow-right"></i></a>
@@ -141,6 +145,7 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
           <li><a href="/professional-training"><i class="fa-solid fa-chevron-right"></i> Professional Training</a></li>
           <li><a href="/capacity-building"><i class="fa-solid fa-chevron-right"></i> Capacity Building</a></li>
           <li><a href="/corporate-training"><i class="fa-solid fa-chevron-right"></i> Corporate Training</a></li>
+          <li><a href="/academic"><i class="fa-solid fa-chevron-right"></i> Academic Programmes</a></li>
           <li><a href="/courses"><i class="fa-solid fa-chevron-right"></i> Course Catalogue</a></li>
         </ul>
       </div>

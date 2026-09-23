@@ -49,6 +49,15 @@ remaining work for this handover.
    available.) `seed_courses.sql` is the real, client-supplied course
    catalogue (184 courses) — see `docs/content/README.md` for where it came
    from and how to regenerate it when the client sends an updated list.
+   - **Later schema changes apply themselves.** Anything added after the
+     first import lives in `database/migrations/NNN_*.sql` and is run by
+     `App\Core\Migrator` on the first request after a deploy (the live
+     site is deployed over FTP by `.github/workflows/deploy.yml`, so there
+     is no shell step to run them). Progress is recorded in
+     `settings.schema_version` and cached in `storage/cache/schema_version`.
+     A failure is logged to the PHP error log and retried after 10 minutes;
+     if the DB user lacks `ALTER` rights, run the pending files by hand in
+     phpMyAdmin (they are safe to re-run) and the app picks up from there.
 
 5. **Create `.env`** in the repo root (copy `.env.example`) and fill in:
    - `APP_URL=https://crawfordinstitute.online`, `APP_DEBUG=false`
@@ -116,10 +125,17 @@ read through:
   portal contact and bulk-enrols staff (pasted-text roster) → the
   corporate contact logs in and sees their cohorts/invoices in
   `/corporate/portal`.
-- Private academic system: admin creates a programme (reachable only via
-  the unlisted `/academic` link) → public applicant applies → admin
-  admits them into an intake → an account + `pending_payment` enrollment
-  is created and the applicant is emailed.
+- Academic system (public at `/academic`, linked from the Programmes menu,
+  homepage and footer; built from the client's documents in
+  `docs/content/academic/`): the 19 seeded programmes list by level →
+  programme page → 8-step online application with document uploads
+  (browser + server validation, including file type/size and a content
+  check that a ".pdf" really is a PDF) → printable receipt with an
+  application number (`CPI-APP-YYYY-NNNNN`) → admin reviews the full form
+  and documents, marks it under review, then admits (account +
+  optional `pending_payment` enrolment + offer email) or declines (email).
+  Admin can create/edit programmes (awarding body, duration, entry
+  requirements, visibility) and drafts stay hidden from the public.
 - Real content import: `schema.sql` → `seed.sql` → `seed_courses.sql`
   imported into a **freshly created** database with zero errors; the
   public `/courses` catalogue lists all 184 real courses, `/corporate-
@@ -177,6 +193,21 @@ sending — confirm this is not still the case once deployed).
   `php -S` testing — Apache/cPanel serves static files from `public/`
   directly via normal `.htaccess`/mod_rewrite, so this code path is
   inert in production and doesn't need touching.
+
+- **Upload limits come from PHP.** The application form reads
+  `upload_max_filesize`, `post_max_size` and `max_file_uploads` and tells
+  applicants the real limits (capped at 5MB per file). Default PHP
+  settings (2MB / 8MB / 20 files) are tight for scanned certificates —
+  raise them in cPanel → MultiPHP INI Editor if applicants struggle.
+
+- **Old form input lasts one request.** `Session::flashInput()` re-fills a
+  form after a failed submit and is cleared on the next request (it used
+  to linger for the whole session). Passwords and the CSRF token are never
+  stored in it.
+
+- **Database times use `APP_TIMEZONE`.** `Database::connection()` sets the
+  MySQL session time zone to PHP's offset, so `NOW()`/`CURRENT_TIMESTAMP`
+  match PHP's `date()` regardless of the hosting server's own clock.
 
 ## Repo hygiene
 

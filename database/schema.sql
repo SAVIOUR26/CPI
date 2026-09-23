@@ -434,19 +434,24 @@ CREATE TABLE IF NOT EXISTS certificates (
 CREATE TABLE IF NOT EXISTS academic_programmes (
   id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   course_id   BIGINT UNSIGNED NOT NULL,       -- courses row with programme_type = 'academic', is_public = 0
-  award_level ENUM('certificate','diploma','degree') NOT NULL,
+  award_level ENUM('certificate','diploma','degree','postgraduate') NOT NULL,
+  awarding_body VARCHAR(190) NULL,               -- examining & awarding university, shown per programme
   duration_note VARCHAR(100) NULL,
   entry_requirements MEDIUMTEXT NULL,
+  sort_order  INT NOT NULL DEFAULT 0,
   FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS academic_applications (
   id             BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  application_no VARCHAR(40) NULL,            -- e.g. CPI-APP-2026-00012
   programme_id   BIGINT UNSIGNED NOT NULL,
   applicant_name VARCHAR(150) NOT NULL,
   email          VARCHAR(190) NOT NULL,
   phone          VARCHAR(30) NULL,
-  documents_path VARCHAR(255) NULL,           -- zipped/uploaded supporting docs
+  documents_path VARCHAR(255) NULL,           -- legacy single upload (pre-2026-09 applications)
+  form_data      MEDIUMTEXT NULL,             -- JSON: full application form (personal, sponsors, UACE/UCE, ...)
+  documents      MEDIUMTEXT NULL,             -- JSON: uploaded file paths by document type
   status         ENUM('submitted','under_review','admitted','rejected') NOT NULL DEFAULT 'submitted',
   decision_note  TEXT NULL,
   reviewed_by    BIGINT UNSIGNED NULL,
@@ -454,6 +459,7 @@ CREATE TABLE IF NOT EXISTS academic_applications (
   intake_id      BIGINT UNSIGNED NULL,        -- assigned cohort/term once admitted
   created_at     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   decided_at     DATETIME NULL,
+  UNIQUE KEY uq_application_no (application_no),
   FOREIGN KEY (programme_id) REFERENCES academic_programmes(id) ON DELETE CASCADE,
   FOREIGN KEY (reviewed_by) REFERENCES users(id) ON DELETE SET NULL,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
