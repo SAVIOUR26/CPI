@@ -13,9 +13,16 @@ if (!function_exists('e')) {
 }
 
 if (!function_exists('asset')) {
+    /**
+     * URL of a file in public/assets/, versioned by its modification time so a
+     * deploy that changes the file makes browsers fetch the new copy instead of
+     * reusing a cached one (stale CSS on new pages breaks the whole layout).
+     */
     function asset(string $path): string
     {
-        return '/assets/' . ltrim($path, '/');
+        $path = ltrim($path, '/');
+        $mtime = @filemtime(BASE_PATH . '/public/assets/' . $path);
+        return '/assets/' . $path . ($mtime ? '?v=' . $mtime : '');
     }
 }
 
