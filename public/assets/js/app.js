@@ -94,7 +94,7 @@
 
 
   /* ---------- Instant filter for long portal tables ---------- */
-  document.querySelectorAll('.dash-main .table-card').forEach(function (card) {
+  document.querySelectorAll('.dash-main .table-card:not([data-no-filter])').forEach(function (card) {
     var rows = card.querySelectorAll('tbody tr');
     if (rows.length <= 8) return;
     var wrap = document.createElement('div');
@@ -351,6 +351,34 @@
     show(start, false);
   }
   document.querySelectorAll('form[data-stepper]').forEach(initStepper);
+
+  /* ---------- Copy-to-clipboard buttons ---------- */
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    var label = btn.innerHTML;
+    function copied() {
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+      setTimeout(function () { btn.innerHTML = label; }, 2000);
+    }
+    function fallback(text) {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+      try { if (document.execCommand('copy')) copied(); } catch (e) {}
+      document.body.removeChild(area);
+    }
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(copied, function () { fallback(text); });
+      } else {
+        fallback(text);
+      }
+    });
+  });
 
   /* ---------- Confirm consequential choices (e.g. admission decisions) ---------- */
   document.querySelectorAll('form[data-decision-form]').forEach(function (form) {

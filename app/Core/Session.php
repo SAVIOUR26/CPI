@@ -56,7 +56,12 @@ class Session
     /** Re-fills forms on the next request only (secrets are never kept). */
     public static function flashInput(array $input): void
     {
-        unset($input['_csrf'], $input['password'], $input['password_confirmation'], $input['current_password']);
+        unset($input['_csrf']);
+        foreach (array_keys($input) as $key) {
+            if (str_contains((string) $key, 'password')) {
+                unset($input[$key]);
+            }
+        }
         $_SESSION['_old'] = $input;
     }
 

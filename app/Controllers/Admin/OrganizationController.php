@@ -10,6 +10,7 @@ use App\Models\Enrollment;
 use App\Models\Intake;
 use App\Models\Organization;
 use App\Models\User;
+use App\Support\NewAccounts;
 
 class OrganizationController extends Controller
 {
@@ -111,7 +112,7 @@ class OrganizationController extends Controller
         $loginNote = $tempPassword
             ? "<p>Temporary password: <strong>" . e($tempPassword) . "</strong> — please change it after logging in.</p>"
             : '';
-        Mailer::send(
+        $emailed = Mailer::send(
             $data['contact_email'],
             $data['contact_name'],
             'Your CPI Corporate Portal access — ' . $org['name'],
@@ -122,7 +123,10 @@ class OrganizationController extends Controller
              . $loginNote
         );
 
-        $this->flash('success', 'Corporate contact set and notified.');
+        if ($tempPassword) {
+            NewAccounts::add($data['contact_name'], $data['contact_email'], $tempPassword, 'corporate', $emailed);
+        }
+        $this->flash('success', 'Corporate contact set' . ($emailed ? ' and notified.' : ' — the email could not be sent, so let them know directly.'));
         $this->redirect('/admin/organizations/' . $orgId);
     }
 
@@ -181,7 +185,7 @@ class OrganizationController extends Controller
                     'status' => 'active',
                 ]);
                 User::assignRole($userId, 'learner');
-                Mailer::send(
+                $emailed = Mailer::send(
                     $email,
                     $name,
                     'Your CPI training account — ' . $intake['code'],
@@ -190,6 +194,7 @@ class OrganizationController extends Controller
                     . "<p>Login: <a href=\"" . url('/login') . "\">" . url('/login') . "</a><br>Email: " . e($email)
                     . "<br>Temporary password: <strong>" . e($tempPassword) . "</strong></p>"
                 );
+                NewAccounts::add($name, $email, $tempPassword, 'student', $emailed);
             } else {
                 $userId = (int) $user['id'];
             }

@@ -226,6 +226,10 @@ $levelCounts = array_map('count', $groups);
             <li><i class="fa-solid fa-circle-check"></i> <?= e($f) ?></li>
           <?php endforeach; ?>
         </ul>
+        <div class="portal-card-foot">
+          <a href="/student-portal" class="btn btn-primary btn-sm"><i class="fa-solid fa-right-to-bracket"></i> Go to the Student Portal</a>
+          <span class="help-text">Admitted students receive their login details from Admissions.</span>
+        </div>
       </div>
       <div class="card portal-card" data-reveal style="--i:1">
         <h3><i class="fa-solid fa-chalkboard-user"></i> Lecturer Portal</h3>
@@ -235,6 +239,10 @@ $levelCounts = array_map('count', $groups);
             <li><i class="fa-solid fa-circle-check"></i> <?= e($f) ?></li>
           <?php endforeach; ?>
         </ul>
+        <div class="portal-card-foot">
+          <a href="/lecturer-portal" class="btn btn-outline btn-sm"><i class="fa-solid fa-right-to-bracket"></i> Go to the Lecturer Portal</a>
+          <span class="help-text">Lecturer accounts are set up by CPI administration.</span>
+        </div>
       </div>
     </div>
   </div>

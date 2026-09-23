@@ -8,6 +8,6 @@ $on = fn (string $p): string => str_starts_with($path, $p) ? 'active' : '';
 <a href="/learner/certificates" class="<?= $on('/learner/certificates') ?>"><i class="fa-solid fa-award"></i> Certificates</a>
 <p class="dash-nav-label">Account</p>
 <a href="/learner/fees" class="<?= $on('/learner/fees') ?: $on('/learner/pay') ?>"><i class="fa-solid fa-receipt"></i> Fees &amp; Payments</a>
-<a href="/learner/profile" class="<?= $on('/learner/profile') ?>"><i class="fa-solid fa-user-pen"></i> Profile</a>
+<a href="/learner/profile" class="<?= $on('/learner/profile') ?>"><i class="fa-solid fa-user-gear"></i> My account</a>
 <p class="dash-nav-label">Explore</p>
 <a href="/courses"><i class="fa-solid fa-magnifying-glass"></i> Browse Catalogue <i class="fa-solid fa-arrow-up-right-from-square ext"></i></a>

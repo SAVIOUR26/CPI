@@ -7,6 +7,7 @@ use App\Core\View;
 $success = flash_get('success');
 $error = flash_get('error');
 $info = flash_get('info');
+$newAccounts = flash_get('new_accounts');
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 // Page views can't pass variables to the layout, so the portal is derived from the URL.
@@ -17,10 +18,10 @@ $portal = match (true) {
     default => 'learner',
 };
 $portalMeta = [
-    'admin' => ['Admin Portal', 'fa-shield-halved'],
-    'lecturer' => ['Lecturer Portal', 'fa-chalkboard-user'],
-    'corporate' => ['Corporate Portal', 'fa-building'],
-    'learner' => ['Learner Portal', 'fa-user-graduate'],
+    'admin' => ['Admin Portal', 'fa-shield-halved', '/admin/account'],
+    'lecturer' => ['Lecturer Portal', 'fa-chalkboard-user', '/lecturer/account'],
+    'corporate' => ['Corporate Portal', 'fa-building', '/corporate/portal/account'],
+    'learner' => ['Student Portal', 'fa-user-graduate', '/learner/profile'],
 ][$portal];
 $sidebar = $sidebar ?? 'partials.sidebar-' . $portal;
 $pageTitle = $pageTitle ?? $portalMeta[0] . ' — CPI';
@@ -80,7 +81,7 @@ $pageLabel = trim(explode('—', $pageTitle)[0]);
       </div>
       <div class="dash-topbar-actions">
         <a href="/" class="topbar-btn" title="View website"><i class="fa-solid fa-globe"></i><span>View website</span></a>
-        <div class="user-chip"><span class="avatar"><?= e(initials($userName)) ?></span><span><?= e(explode(' ', $userName)[0] === 'Dr.' ? $userName : explode(' ', $userName)[0]) ?></span></div>
+        <a href="<?= e($portalMeta[2]) ?>" class="user-chip" title="My account"><span class="avatar"><?= e(initials($userName)) ?></span><span><?= e(explode(' ', $userName)[0] === 'Dr.' ? $userName : explode(' ', $userName)[0]) ?></span></a>
       </div>
     </header>
 
@@ -88,6 +89,7 @@ $pageLabel = trim(explode('—', $pageTitle)[0]);
       <?php if ($success): ?><div class="alert alert-success"><?= e($success) ?></div><?php endif; ?>
       <?php if ($error): ?><div class="alert alert-error"><?= e($error) ?></div><?php endif; ?>
       <?php if ($info): ?><div class="alert alert-info"><?= e($info) ?></div><?php endif; ?>
+      <?php if ($newAccounts): ?><?php View::partial('partials.new-accounts', ['accounts' => $newAccounts]); ?><?php endif; ?>
       <?= $content ?>
     </main>
   </div>

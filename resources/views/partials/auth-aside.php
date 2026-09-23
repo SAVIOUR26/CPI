@@ -1,4 +1,11 @@
-<?php /** @var string $heading */ /** @var string $text */ ?>
+<?php
+/** @var string $heading */ /** @var string $text */ /** @var array|null $points [icon, title, text] rows */
+$points = ($points ?? null) ?: [
+  ['fa-book-open-reader', 'Your courses in one place', 'Materials, quizzes, assignments and grades.'],
+  ['fa-mobile-screen-button', 'Pay the easy way', 'MTN Mobile Money, Airtel Money, card or bank transfer.'],
+  ['fa-shield-halved', 'Verifiable certificates', 'QR-coded certificates employers can check online.'],
+];
+?>
 <aside class="auth-aside">
   <div class="hero-bg" aria-hidden="true">
     <span class="orb orb-1"></span>
@@ -15,8 +22,8 @@
   <h2><?= e($heading) ?></h2>
   <p><?= e($text) ?></p>
   <ul class="auth-points">
-    <li><i class="fa-solid fa-book-open-reader"></i><div><strong>Your courses in one place</strong><span>Materials, quizzes, assignments and grades.</span></div></li>
-    <li><i class="fa-solid fa-mobile-screen-button"></i><div><strong>Pay the easy way</strong><span>MTN Mobile Money, Airtel Money, card or bank transfer.</span></div></li>
-    <li><i class="fa-solid fa-shield-halved"></i><div><strong>Verifiable certificates</strong><span>QR-coded certificates employers can check online.</span></div></li>
+    <?php foreach ($points as [$icon, $title, $body]): ?>
+      <li><i class="fa-solid <?= e($icon) ?>"></i><div><strong><?= e($title) ?></strong><span><?= e($body) ?></span></div></li>
+    <?php endforeach; ?>
   </ul>
 </aside>
