@@ -11,7 +11,7 @@
     <p><strong>Preferred dates:</strong> <?= e($cr['preferred_dates'] ?? '—') ?></p>
     <p><strong>Budget note:</strong> <?= e($cr['budget_note'] ?? '—') ?></p>
     <p><strong>Message:</strong><br><?= nl2br(e($cr['message'] ?? '—')) ?></p>
-    <p><strong>Status:</strong> <span class="status status-<?= e($cr['status']) ?>"><?= e($cr['status']) ?></span></p>
+    <p><strong>Status:</strong> <span class="status status-<?= e($cr['status']) ?>"><?= e(str_replace('_', ' ', $cr['status'])) ?></span></p>
     <?php if ($cr['quote_pdf_path']): ?><p><a href="/admin/corporate-requests/<?= (int)$cr['id'] ?>/quote-file">View uploaded quote</a></p><?php endif; ?>
   </div>
 

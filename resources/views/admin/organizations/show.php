@@ -39,7 +39,7 @@
       <tr>
         <td><?= e($c['code']) ?></td><td><?= e($c['course_title']) ?></td><td><?= date_pretty($c['start_date']) ?></td>
         <td><?= (int) $c['seats_taken'] ?><?= $c['capacity'] ? ' / ' . (int) $c['capacity'] : '' ?></td>
-        <td><span class="status status-<?= e($c['status']) ?>"><?= e($c['status']) ?></span></td>
+        <td><span class="status status-<?= e($c['status']) ?>"><?= e(str_replace('_', ' ', $c['status'])) ?></span></td>
       </tr>
     <?php endforeach; ?>
     <?php if (!$cohorts): ?><tr><td colspan="5">No cohorts yet — convert a corporate request to create one.</td></tr><?php endif; ?>

@@ -1,27 +1,26 @@
-<?php /** @var array $meta */ /** @var array $courses */ /** @var string $slug */ ?>
+<?php /** @var array $meta */ /** @var array $courses */ /** @var string $slug */
+$actions = $slug === 'corporate-training'
+  ? [['label' => 'Request customized training', 'href' => '/corporate/request', 'class' => 'btn-gold', 'icon' => 'fa-handshake'], ['label' => 'Browse full catalogue', 'href' => '/courses', 'class' => 'btn-ghost-light']]
+  : [['label' => 'Browse full catalogue', 'href' => '/courses', 'class' => 'btn-gold', 'icon' => 'fa-magnifying-glass']];
+\App\Core\View::partial('partials.page-hero', [
+  'eyebrow' => 'Learning pathway',
+  'title' => $meta['title'],
+  'lead' => $meta['lead'],
+  'crumbs' => [['label' => 'Programmes'], ['label' => $meta['title']]],
+  'stats' => [['icon' => pillar_icon($slug), 'text' => count($courses) . ' courses in this pathway']],
+  'actions' => $actions,
+]);
+?>
 <section class="section">
   <div class="container">
-    <p class="eyebrow"><?= e($meta['title']) ?></p>
-    <h1><?= e($meta['title']) ?></h1>
-    <p class="lead" style="max-width:720px"><?= e($meta['lead']) ?></p>
-
-    <?php if ($slug === 'corporate-training'): ?>
-      <div class="hero-actions" style="margin-bottom:30px">
-        <a href="/corporate/request" class="btn btn-primary">Request Customized Training</a>
-        <a href="/courses" class="btn btn-outline">Browse Full Catalogue</a>
-      </div>
-    <?php endif; ?>
-
     <div class="grid-3">
-      <?php foreach ($courses as $c): ?>
-        <a href="/courses/<?= e($c['slug']) ?>" class="card course-card">
-          <span class="badge"><?= e(ucfirst($c['level'])) ?></span>
-          <h3><?= e($c['title']) ?></h3>
-          <p><?= e($c['summary']) ?></p>
-          <div class="price"><?= money($c['price_amount'], $c['price_currency']) ?></div>
-        </a>
+      <?php foreach ($courses as $n => $c): ?>
+        <?php \App\Core\View::partial('partials.course-card', ['c' => $c, 'i' => $n]); ?>
       <?php endforeach; ?>
-      <?php if (!$courses): ?><p>Courses for this pathway are being finalized — check back shortly, or <a href="/corporate/request">request customized training</a>.</p><?php endif; ?>
+      <?php if (!$courses): ?>
+        <div class="card empty-state"><i class="fa-solid fa-book-open"></i><h3>Courses are being finalized</h3>
+          <p>Check back shortly, or <a href="/corporate/request">request customized training</a>.</p></div>
+      <?php endif; ?>
     </div>
   </div>
 </section>

@@ -1,10 +1,19 @@
-<?php $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); ?>
-<a href="/admin" class="<?= $path === '/admin' ? 'active' : '' ?>">Dashboard</a>
-<a href="/admin/courses" class="<?= str_starts_with($path, '/admin/courses') ? 'active' : '' ?>">Courses &amp; Intakes</a>
-<a href="/admin/corporate-requests" class="<?= str_starts_with($path, '/admin/corporate-requests') ? 'active' : '' ?>">Corporate Requests</a>
-<a href="/admin/organizations" class="<?= str_starts_with($path, '/admin/organizations') ? 'active' : '' ?>">Organizations</a>
-<a href="/admin/payments" class="<?= str_starts_with($path, '/admin/payments') ? 'active' : '' ?>">Payments</a>
-<a href="/admin/certificates" class="<?= str_starts_with($path, '/admin/certificates') ? 'active' : '' ?>">Certificates</a>
-<a href="/admin/academic" class="<?= str_starts_with($path, '/admin/academic') ? 'active' : '' ?>">Academic Admissions</a>
-<a href="/admin/users" class="<?= str_starts_with($path, '/admin/users') ? 'active' : '' ?>">Users &amp; Roles</a>
-<a href="/admin/reports" class="<?= str_starts_with($path, '/admin/reports') ? 'active' : '' ?>">Reports</a>
+<?php
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$on = fn (string $p): string => str_starts_with($path, $p) ? 'active' : '';
+?>
+<p class="dash-nav-label">Overview</p>
+<a href="/admin" class="<?= $path === '/admin' ? 'active' : '' ?>"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+<a href="/admin/reports" class="<?= $on('/admin/reports') ?>"><i class="fa-solid fa-chart-pie"></i> Reports</a>
+<p class="dash-nav-label">Training</p>
+<a href="/admin/courses" class="<?= $on('/admin/courses') ?>"><i class="fa-solid fa-book-open"></i> Courses &amp; Intakes</a>
+<a href="/admin/certificates" class="<?= $on('/admin/certificates') ?>"><i class="fa-solid fa-award"></i> Certificates</a>
+<p class="dash-nav-label">Clients</p>
+<a href="/admin/corporate-requests" class="<?= $on('/admin/corporate-requests') ?>"><i class="fa-solid fa-handshake"></i> Corporate Requests</a>
+<a href="/admin/organizations" class="<?= $on('/admin/organizations') ?>"><i class="fa-solid fa-building"></i> Organizations</a>
+<a href="/admin/payments" class="<?= $on('/admin/payments') ?>"><i class="fa-solid fa-money-bill-wave"></i> Payments</a>
+<p class="dash-nav-label">Academic</p>
+<a href="/admin/academic/applications" class="<?= $on('/admin/academic/applications') ?>"><i class="fa-solid fa-file-signature"></i> Admissions</a>
+<a href="/admin/academic/programmes" class="<?= $on('/admin/academic/programmes') ?>"><i class="fa-solid fa-building-columns"></i> Programmes</a>
+<p class="dash-nav-label">System</p>
+<a href="/admin/users" class="<?= $on('/admin/users') ?>"><i class="fa-solid fa-users-gear"></i> Users &amp; Roles</a>

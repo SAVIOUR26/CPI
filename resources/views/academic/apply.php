@@ -1,8 +1,11 @@
+<?php \App\Core\View::partial('partials.page-hero', [
+  'eyebrow' => ucfirst($programme['award_level']) . ' programme',
+  'title' => 'Apply — ' . $programme['title'],
+  'crumbs' => [['label' => 'Academic Programmes', 'href' => '/academic'], ['label' => 'Apply']],
+]); ?>
 <section class="section">
   <div class="container">
     <div class="form-card wide">
-      <p class="eyebrow"><?= e(ucfirst($programme['award_level'])) ?> Programme</p>
-      <h1>Apply — <?= e($programme['title']) ?></h1>
       <p><?= e($programme['summary']) ?></p>
       <?php if ($programme['entry_requirements']): ?>
         <p><strong>Entry requirements:</strong> <?= nl2br(e($programme['entry_requirements'])) ?></p>

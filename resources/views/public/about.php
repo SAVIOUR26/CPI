@@ -1,7 +1,14 @@
+<?php \App\Core\View::partial('partials.page-hero', [
+  'eyebrow' => 'About us',
+  'title' => 'About Crawford Professionals Institute',
+  'lead' => 'A professional training and capacity-building institution equipping individuals and organizations with practical, industry-relevant skills.',
+  'crumbs' => [['label' => 'About']],
+  'stats' => [['icon' => 'fa-location-dot', 'text' => 'Kampala, Uganda'], ['icon' => 'fa-earth-africa', 'text' => 'Serving professionals across Africa']],
+]); ?>
 <section class="section">
-  <div class="container" style="max-width:820px">
-    <p class="eyebrow">About Us</p>
-    <h1>About Crawford Professionals Institute (CPI)</h1>
+  <div class="container" style="max-width:860px">
+    <p class="eyebrow">Who we are</p>
+    <h2>Building competence, strengthening institutions</h2>
     <p class="lead">Crawford Professionals Institute (CPI) is a leading professional training and
       capacity-building institution committed to equipping individuals and organizations with practical,
       industry-relevant skills for today's dynamic workplace.</p>
@@ -16,8 +23,8 @@
 </section>
 
 <section class="section section-soft">
-  <div class="container" style="max-width:820px">
-    <p class="eyebrow">Why Choose CPI</p>
+  <div class="container" style="max-width:860px">
+    <p class="eyebrow">Why choose CPI</p>
     <h2>A trusted partner for professional development</h2>
     <p>CPI is a premier professional training and capacity-building institution dedicated to developing
       competent professionals, strengthening organizational performance, and promoting excellence across
@@ -56,8 +63,9 @@
         'Affordable, value-driven training solutions',
         'Commitment to continuous professional development and organizational transformation',
       ]; ?>
-      <?php foreach ($advantages as $a): ?>
-        <div class="card"><p style="margin:0"><?= e($a) ?></p></div>
+      <?php $advIcons = ['fa-earth-africa','fa-chalkboard-user','fa-list-check','fa-building','fa-laptop-code','fa-book','fa-people-arrows','fa-house-laptop','fa-hand-holding-dollar','fa-arrow-trend-up']; ?>
+      <?php foreach ($advantages as $n => $a): ?>
+        <div class="card value-card" data-reveal style="--i:<?= $n % 3 ?>"><span class="f-icon"><i class="fa-solid <?= $advIcons[$n] ?? 'fa-check' ?>"></i></span><p><?= e($a) ?></p></div>
       <?php endforeach; ?>
     </div>
   </div>
@@ -66,14 +74,14 @@
 <section class="section section-soft">
   <div class="container">
     <div class="grid-2">
-      <div class="card">
-        <h3>Our Mission</h3>
+      <div class="card mv-card" data-reveal>
+        <h3><i class="fa-solid fa-bullseye"></i> Our Mission</h3>
         <p style="margin:0">To empower professionals and institutions through innovative, practical, and
           internationally recognized training programmes that enhance competence, improve organizational
           performance, and contribute to sustainable development.</p>
       </div>
-      <div class="card">
-        <h3>Our Vision</h3>
+      <div class="card mv-card" data-reveal style="--i:1">
+        <h3><i class="fa-solid fa-eye"></i> Our Vision</h3>
         <p style="margin:0">To be Africa's leading professional training and capacity development institute,
           recognized for excellence, innovation, and transformative learning that creates lasting impact for
           individuals, organizations, and communities.</p>
@@ -88,7 +96,7 @@
       professional competence, strengthen institutions, develop leaders, and create lasting impact through
       knowledge, innovation, and excellence.</p>
     <div class="hero-actions" style="justify-content:center;margin-top:18px">
-      <a href="/courses" class="btn btn-primary">Browse Courses</a>
+      <a href="/courses" class="btn btn-primary">Browse Courses <i class="fa-solid fa-arrow-right"></i></a>
       <a href="/corporate/request" class="btn btn-outline">Request Corporate Training</a>
     </div>
   </div>

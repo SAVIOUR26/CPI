@@ -17,12 +17,20 @@ class CourseController extends Controller
         $courses = Course::catalogue($category ?: null, $search ?: null);
         $categories = CourseCategory::all('sort_order');
 
+        $perPage = 24;
+        $total = count($courses);
+        $pages = max(1, (int) ceil($total / $perPage));
+        $page = min($pages, max(1, (int) $request->input('page', 1)));
+
         $this->view('public.courses.index', [
             'pageTitle' => 'Course Catalogue — CPI',
-            'courses' => $courses,
+            'courses' => array_slice($courses, ($page - 1) * $perPage, $perPage),
             'categories' => $categories,
             'activeCategory' => $category,
             'search' => $search,
+            'total' => $total,
+            'page' => $page,
+            'pages' => $pages,
         ]);
     }
 
@@ -36,12 +44,14 @@ class CourseController extends Controller
 
         $intakes = Course::openIntakes((int) $course['id']);
         $pillars = Course::pillars((int) $course['id']);
+        $category = $course['category_id'] ? CourseCategory::find((int) $course['category_id']) : null;
 
         $this->view('public.courses.show', [
             'pageTitle' => $course['title'] . ' — CPI',
             'course' => $course,
             'intakes' => $intakes,
             'pillars' => $pillars,
+            'category' => $category,
         ]);
     }
 }
