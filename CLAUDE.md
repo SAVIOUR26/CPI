@@ -87,9 +87,11 @@ remaining work for this handover.
 
 8. **Change the seeded super admin password immediately.** Default
    credentials from `database/seed.sql` are
-   `admin@crawfordinstitute.online` / `ChangeMe123!` — log in once,
-   change the password via the admin profile page, and consider changing
-   the email too if it shouldn't be the literal string "admin@...".
+   `admin@crawfordinstitute.online` / `ChangeMe123!` — log in once and
+   change the password at `/learner/profile` → "Change password" (the
+   admin portal has no account page of its own yet; that page works for
+   any signed-in account). Consider changing the email too if it
+   shouldn't be the literal string "admin@...".
 
 9. **Verify PHP version** on the hosting account is 8.1+ (cPanel → MultiPHP
    Manager). The app uses `str_starts_with()`, constructor property
