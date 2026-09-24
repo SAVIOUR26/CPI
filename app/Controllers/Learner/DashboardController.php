@@ -2,7 +2,6 @@
 
 namespace App\Controllers\Learner;
 
-use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Upload;
@@ -10,7 +9,6 @@ use App\Models\Certificate;
 use App\Models\Enrollment;
 use App\Models\FeeLedger;
 use App\Models\Timetable;
-use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -81,49 +79,5 @@ class DashboardController extends Controller
             'pageTitle' => 'My Fees — CPI',
             'ledger' => $ledger,
         ], 'layouts.dashboard');
-    }
-
-    public function profile(Request $request): void
-    {
-        $user = $this->requireAuth();
-        $this->view('learner.profile', [
-            'pageTitle' => 'My Profile — CPI',
-            'user' => $user,
-        ], 'layouts.dashboard');
-    }
-
-    public function updateProfile(Request $request): void
-    {
-        $user = $this->requireAuth();
-        $this->verifyCsrf($request);
-
-        $data = $this->validate($request, [
-            'full_name' => 'required|max:150',
-            'phone' => 'max:30',
-        ]);
-
-        User::update((int) $user['id'], $data);
-        Auth::refreshAbilities();
-        $this->flash('success', 'Profile updated.');
-        $this->redirect('/learner/profile');
-    }
-
-    public function updatePassword(Request $request): void
-    {
-        $user = $this->requireAuth();
-        $this->verifyCsrf($request);
-
-        $current = (string) $request->input('current_password');
-        $data = $this->validate($request, ['password' => 'required|min:8|confirmed']);
-
-        if (!password_verify($current, $user['password_hash'])) {
-            $this->flash('error', 'Your current password is incorrect.');
-            $this->redirect('/learner/profile');
-            return;
-        }
-
-        User::update((int) $user['id'], ['password_hash' => password_hash($data['password'], PASSWORD_BCRYPT)]);
-        $this->flash('success', 'Password updated.');
-        $this->redirect('/learner/profile');
     }
 }

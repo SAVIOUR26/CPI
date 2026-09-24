@@ -37,6 +37,8 @@ $router->post('/webhooks/flutterwave', [WebhookController::class, 'flutterwave']
 
 // ── Auth ─────────────────────────────────────────────────────────────────
 $router->get('/login', [AuthController::class, 'showLogin']);
+$router->get('/student-portal', [AuthController::class, 'studentPortal']);
+$router->get('/lecturer-portal', [AuthController::class, 'lecturerPortal']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->get('/register', [AuthController::class, 'showRegister']);
 $router->post('/register', [AuthController::class, 'register']);

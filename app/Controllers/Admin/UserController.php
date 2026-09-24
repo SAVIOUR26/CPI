@@ -8,6 +8,7 @@ use App\Core\Mailer;
 use App\Core\Request;
 use App\Models\Role;
 use App\Models\User;
+use App\Support\NewAccounts;
 
 class UserController extends Controller
 {
@@ -42,6 +43,7 @@ class UserController extends Controller
         $data = $this->validate($request, [
             'full_name' => 'required|max:150',
             'email' => 'required|email',
+            'role' => 'required|in:' . implode(',', array_column(Role::all(), 'slug')),
         ]);
 
         if (User::findByEmail($data['email'])) {
@@ -59,21 +61,26 @@ class UserController extends Controller
             'status' => 'active',
         ]);
 
-        $role = $request->input('role', 'learner');
+        $role = $data['role'];
         User::assignRole($userId, $role);
+        $roleName = array_column(Role::all(), 'name', 'slug')[$role] ?? $role;
+        $portal = NewAccounts::portalForRole($role);
+        $loginUrl = NewAccounts::loginUrl($portal);
 
-        Mailer::send(
+        $emailed = Mailer::send(
             $data['email'],
             $data['full_name'],
-            'Your CPI staff account',
+            'Your ' . NewAccounts::PORTALS[$portal][0] . ' account — Crawford Professionals Institute',
             "<p>Dear " . e($data['full_name']) . ",</p><p>An account has been created for you at Crawford Professionals Institute
-             with the role of <strong>" . e($role) . "</strong>.</p>
-             <p>Login: <a href=\"" . url('/login') . "\">" . url('/login') . "</a><br>Email: " . e($data['email'])
+             with the role of <strong>" . e($roleName) . "</strong>.</p>
+             <p>Sign in: <a href=\"" . e($loginUrl) . "\">" . e($loginUrl) . "</a><br>Email: " . e($data['email'])
              . "<br>Temporary password: <strong>" . e($tempPassword) . "</strong></p>"
+             . "<p>Please change this password under <strong>My account</strong> after you sign in.</p>"
         );
+        NewAccounts::add($data['full_name'], $data['email'], $tempPassword, $portal, $emailed);
 
         AuditLog::record('user.create', 'user', $userId, ['role' => $role]);
-        $this->flash('success', 'User created and notified.');
+        $this->flash('success', $roleName . ' account created for ' . $data['full_name'] . '.');
         $this->redirect('/admin/users');
     }
 

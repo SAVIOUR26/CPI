@@ -18,6 +18,7 @@ use App\Models\FeeLedger;
 use App\Models\Intake;
 use App\Models\Timetable;
 use App\Models\User;
+use App\Support\NewAccounts;
 use App\Support\Str;
 
 class AcademicController extends Controller
@@ -386,7 +387,7 @@ class AcademicController extends Controller
                 ? '<p>We have created your Student Portal account:<br>Email: <strong>' . e($app['email']) . '</strong><br>Temporary password: <strong>'
                   . e($tempPassword) . '</strong><br>Please change this password after you first log in.</p>'
                 : '<p>Log in to the Student Portal with your existing CPI account (' . e($app['email']) . ').</p>';
-            Mailer::send(
+            $emailed = Mailer::send(
                 $app['email'],
                 $app['applicant_name'],
                 'Offer of admission' . $ref . ' — Crawford Professionals Institute',
@@ -395,7 +396,11 @@ class AcademicController extends Controller
                 . $login . '<p>Log in at <a href="' . e(url('/login')) . '">' . e(url('/login')) . '</a> to complete your registration and fee payment.</p>'
                 . '<p>Please keep your original academic documents — you may be asked to present them for verification.</p>' . $signoff
             );
-            $message = 'Applicant admitted and notified by email' . ($intakeId ? ', with an enrolment awaiting payment.' : '. Assign an intake when one is available.');
+            if ($tempPassword) {
+                NewAccounts::add($app['applicant_name'], $app['email'], $tempPassword, 'student', $emailed);
+            }
+            $message = 'Applicant admitted' . ($emailed ? ' and the offer emailed' : ' — the offer email could not be sent, so let them know directly')
+                . ($intakeId ? ', with an enrolment awaiting payment.' : '. Assign an intake when one is available.');
         } else {
             Mailer::send(
                 $app['email'],

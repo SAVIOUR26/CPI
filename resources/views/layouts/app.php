@@ -45,6 +45,8 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
       <a href="mailto:info@crawfordinstitute.online"><i class="fa-solid fa-envelope"></i> info@crawfordinstitute.online</a>
     </div>
     <div class="topbar-group">
+      <a href="/student-portal"><i class="fa-solid fa-user-graduate"></i> Student Portal</a>
+      <a href="/lecturer-portal"><i class="fa-solid fa-chalkboard-user"></i> Lecturer Portal</a>
       <a href="/verify"><i class="fa-solid fa-shield-halved"></i> Verify a Certificate</a>
       <a href="/corporate/request"><i class="fa-solid fa-handshake"></i> Corporate Enquiries</a>
     </div>
@@ -101,6 +103,10 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
         <a href="/about" class="nav-link<?= $isActive('/about') ? ' is-active' : '' ?>">About</a>
         <a href="/contact" class="nav-link<?= $isActive('/contact') ? ' is-active' : '' ?>">Contact</a>
       </nav>
+      <div class="nav-portals">
+        <a href="/student-portal"><i class="fa-solid fa-user-graduate"></i> Student Portal</a>
+        <a href="/lecturer-portal"><i class="fa-solid fa-chalkboard-user"></i> Lecturer Portal</a>
+      </div>
       <div class="nav-actions">
         <?php if (Auth::check()): ?>
           <a href="<?= Auth::homeFor($auth_roles ?? []) ?>" class="btn btn-outline btn-sm"><i class="fa-solid fa-gauge-high"></i> My Dashboard</a>
@@ -155,7 +161,8 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
           <li><a href="/about"><i class="fa-solid fa-chevron-right"></i> About CPI</a></li>
           <li><a href="/verify"><i class="fa-solid fa-chevron-right"></i> Verify a Certificate</a></li>
           <li><a href="/corporate/request"><i class="fa-solid fa-chevron-right"></i> Request Corporate Training</a></li>
-          <li><a href="/login"><i class="fa-solid fa-chevron-right"></i> Learner Portal</a></li>
+          <li><a href="/student-portal"><i class="fa-solid fa-chevron-right"></i> Student Portal</a></li>
+          <li><a href="/lecturer-portal"><i class="fa-solid fa-chevron-right"></i> Lecturer Portal</a></li>
         </ul>
       </div>
       <div>

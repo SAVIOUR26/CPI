@@ -88,10 +88,8 @@ remaining work for this handover.
 8. **Change the seeded super admin password immediately.** Default
    credentials from `database/seed.sql` are
    `admin@crawfordinstitute.online` / `ChangeMe123!` — log in once and
-   change the password at `/learner/profile` → "Change password" (the
-   admin portal has no account page of its own yet; that page works for
-   any signed-in account). Consider changing the email too if it
-   shouldn't be the literal string "admin@...".
+   change the password (and the email, if it shouldn't be the literal
+   "admin@..." address) under **My account** (`/admin/account`).
 
 9. **Verify PHP version** on the hosting account is 8.1+ (cPanel → MultiPHP
    Manager). The app uses `str_starts_with()`, constructor property
@@ -138,6 +136,17 @@ read through:
   optional `pending_payment` enrolment + offer email) or declines (email).
   Admin can create/edit programmes (awarding body, duration, entry
   requirements, visibility) and drafts stay hidden from the public.
+- Portals and accounts: "Student Portal" / "Lecturer Portal" links (top
+  bar, phone menu, footer, `/academic`) go to `/student-portal` and
+  `/lecturer-portal`, which open the login page on that portal's tab and
+  land people in the right portal (or explain why not). An admin creates a
+  lecturer in Users & Roles and is shown the temporary password once
+  (`App\Support\NewAccounts`, also used when admitting an applicant,
+  setting a corporate contact and bulk-enrolling staff), so onboarding
+  works even when email doesn't. The lecturer signs in with it and changes
+  it under **My account**, which every portal has (`/admin/account`,
+  `/lecturer/account`, `/corporate/portal/account`, `/learner/profile`);
+  changing the sign-in email there needs the current password.
 - Real content import: `schema.sql` → `seed.sql` → `seed_courses.sql`
   imported into a **freshly created** database with zero errors; the
   public `/courses` catalogue lists all 184 real courses, `/corporate-

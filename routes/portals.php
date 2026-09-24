@@ -4,6 +4,7 @@
 
 use App\Controllers\Academic\GatewayController as AcademicGateway;
 use App\Controllers\Admin\AcademicController as AdminAcademic;
+use App\Controllers\Auth\AccountController as Account;
 use App\Controllers\Admin\CertificateController as AdminCertificate;
 use App\Controllers\Admin\CorporateRequestController as AdminCorporateRequest;
 use App\Controllers\Admin\CourseController as AdminCourse;
@@ -24,9 +25,9 @@ $router->get('/learner/courses', [LearnerDashboard::class, 'courses']);
 $router->get('/learner/certificates', [LearnerDashboard::class, 'certificates']);
 $router->get('/learner/certificates/{code}/download', [LearnerDashboard::class, 'downloadCertificate']);
 $router->get('/learner/fees', [LearnerDashboard::class, 'fees']);
-$router->get('/learner/profile', [LearnerDashboard::class, 'profile']);
-$router->post('/learner/profile', [LearnerDashboard::class, 'updateProfile']);
-$router->post('/learner/profile/password', [LearnerDashboard::class, 'updatePassword']);
+$router->get('/learner/profile', [Account::class, 'show']);
+$router->post('/learner/profile', [Account::class, 'updateProfile']);
+$router->post('/learner/profile/password', [Account::class, 'updatePassword']);
 
 $router->get('/learner/courses/{intake}', [CourseRoomController::class, 'show']);
 $router->get('/learner/materials/{material}/download', [CourseRoomController::class, 'downloadMaterial']);
@@ -39,6 +40,9 @@ $router->post('/learner/quizzes/{quiz}/attempt/{attempt}', [CourseRoomController
 
 // ── Lecturer portal ─────────────────────────────────────────────────────
 $router->get('/lecturer', [LecturerDashboard::class, 'index']);
+$router->get('/lecturer/account', [Account::class, 'show']);
+$router->post('/lecturer/account', [Account::class, 'updateProfile']);
+$router->post('/lecturer/account/password', [Account::class, 'updatePassword']);
 $router->get('/lecturer/classes/{intake}', [LecturerIntake::class, 'show']);
 $router->post('/lecturer/classes/{intake}/materials', [LecturerIntake::class, 'addMaterial']);
 $router->post('/lecturer/classes/{intake}/assignments', [LecturerIntake::class, 'createAssignment']);
@@ -54,6 +58,9 @@ $router->post('/lecturer/quizzes/{quiz}/questions', [LecturerIntake::class, 'add
 
 // ── Corporate portal ────────────────────────────────────────────────────
 $router->get('/corporate/portal', [CorporatePortal::class, 'index']);
+$router->get('/corporate/portal/account', [Account::class, 'show']);
+$router->post('/corporate/portal/account', [Account::class, 'updateProfile']);
+$router->post('/corporate/portal/account/password', [Account::class, 'updatePassword']);
 $router->get('/corporate/portal/cohorts', [CorporatePortal::class, 'cohorts']);
 $router->get('/corporate/portal/invoices', [CorporatePortal::class, 'invoices']);
 
@@ -66,6 +73,9 @@ $router->get('/academic/application-received', [AcademicGateway::class, 'receive
 
 // ── Admin portal ─────────────────────────────────────────────────────────
 $router->get('/admin', [AdminDashboard::class, 'index']);
+$router->get('/admin/account', [Account::class, 'show']);
+$router->post('/admin/account', [Account::class, 'updateProfile']);
+$router->post('/admin/account/password', [Account::class, 'updatePassword']);
 
 $router->get('/admin/courses', [AdminCourse::class, 'index']);
 $router->get('/admin/courses/create', [AdminCourse::class, 'create']);

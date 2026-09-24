@@ -17,3 +17,4 @@ $on = fn (string $p): string => str_starts_with($path, $p) ? 'active' : '';
 <a href="/admin/academic/programmes" class="<?= $on('/admin/academic/programmes') ?>"><i class="fa-solid fa-building-columns"></i> Programmes</a>
 <p class="dash-nav-label">System</p>
 <a href="/admin/users" class="<?= $on('/admin/users') ?>"><i class="fa-solid fa-users-gear"></i> Users &amp; Roles</a>
+<a href="/admin/account" class="<?= $on('/admin/account') ?>"><i class="fa-solid fa-user-gear"></i> My account</a>
