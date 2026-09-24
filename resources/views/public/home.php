@@ -62,7 +62,7 @@ $heroChips = array_slice($heroChips, 0, 4);
       <ul class="hero-trust">
         <li><i class="fa-solid fa-shield-halved"></i> Certificates verifiable online</li>
         <li><i class="fa-solid fa-mobile-screen-button"></i> Pay by Mobile Money or card</li>
-        <li><i class="fa-solid fa-house-laptop"></i> Online, in-person &amp; hybrid</li>
+        <li><i class="fa-solid fa-house-laptop"></i> Online, on-site &amp; in-house</li>
       </ul>
     </div>
 
@@ -75,7 +75,7 @@ $heroChips = array_slice($heroChips, 0, 4);
         <div class="hc-stats">
           <div class="hc-stat"><strong data-count="<?= count($categories) ?>"><?= count($categories) ?></strong><span>Fields of study</span></div>
           <div class="hc-stat"><strong data-count="<?= count($pillars) ?>"><?= count($pillars) ?></strong><span>Learning pathways</span></div>
-          <div class="hc-stat"><strong data-count="4">4</strong><span>Delivery modes</span></div>
+          <div class="hc-stat"><strong data-count="<?= count(\App\Support\Institute::TRAINING_MODES) ?>"><?= count(\App\Support\Institute::TRAINING_MODES) ?></strong><span>Training modes</span></div>
         </div>
         <div class="hc-chips">
           <?php foreach ($heroChips as $cat): ?>
@@ -203,7 +203,7 @@ $heroChips = array_slice($heroChips, 0, 4);
         ['fa-chalkboard-user', 'Expert facilitators', 'Experienced consultants and industry practitioners.'],
         ['fa-list-check', 'Competency-based', 'Practical, hands-on learning you can apply immediately.'],
         ['fa-building', 'Tailored for organizations', 'Customized corporate and institutional programmes.'],
-        ['fa-house-laptop', 'Flexible delivery', 'Physical, virtual, hybrid and in-house options.'],
+        ['fa-house-laptop', 'Flexible delivery', 'Online, on-site, in-house, or at our training venues.'],
         ['fa-hand-holding-dollar', 'Value-driven', 'Affordable training with measurable outcomes.'],
       ];
       foreach ($features as $n => [$icon, $title, $text]): ?>

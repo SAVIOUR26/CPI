@@ -216,6 +216,12 @@ sending — confirm this is not still the case once deployed).
   to linger for the whole session). Passwords and the CSRF token are never
   stored in it.
 
+- **Contact details live in one place.** Location, training coverage,
+  phone numbers, WhatsApp, email and the four training modes are constants
+  in `App\Support\Institute`; the top bar, phone menu, footer, Contact and
+  About pages, the WhatsApp button, the corporate request form's mode list
+  and the homepage's search-engine data (JSON-LD) all read from it.
+
 - **Database times use `APP_TIMEZONE`.** `Database::connection()` sets the
   MySQL session time zone to PHP's offset, so `NOW()`/`CURRENT_TIMESTAMP`
   match PHP's `date()` regardless of the hosting server's own clock.

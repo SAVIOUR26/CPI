@@ -7,7 +7,7 @@
     <p><strong>Contact:</strong> <?= e($cr['contact_name']) ?> (<?= e($cr['contact_email']) ?>, <?= e($cr['contact_phone'] ?? '—') ?>)</p>
     <p><strong>Topic:</strong> <?= e($cr['topic']) ?></p>
     <p><strong>Headcount:</strong> <?= e((string) ($cr['headcount'] ?? '—')) ?></p>
-    <p><strong>Mode:</strong> <?= e(str_replace('_',' ',$cr['mode'])) ?> &middot; <strong>Location:</strong> <?= e($cr['location'] ?? '—') ?></p>
+    <p><strong>Mode:</strong> <?= e(\App\Support\Institute::modeLabel($cr['mode'])) ?> &middot; <strong>Location:</strong> <?= e($cr['location'] ?? '—') ?></p>
     <p><strong>Preferred dates:</strong> <?= e($cr['preferred_dates'] ?? '—') ?></p>
     <p><strong>Budget note:</strong> <?= e($cr['budget_note'] ?? '—') ?></p>
     <p><strong>Message:</strong><br><?= nl2br(e($cr['message'] ?? '—')) ?></p>

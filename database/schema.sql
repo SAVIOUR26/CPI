@@ -187,7 +187,7 @@ CREATE TABLE IF NOT EXISTS corporate_requests (
   course_id          BIGINT UNSIGNED NULL,
   headcount          INT UNSIGNED NULL,
   location           VARCHAR(190) NULL,
-  mode               ENUM('online','in_person','hybrid') NOT NULL DEFAULT 'in_person',
+  mode               ENUM('online','in_person','hybrid','onsite','in_house') NOT NULL DEFAULT 'in_person',
   preferred_dates    VARCHAR(190) NULL,
   budget_note        VARCHAR(190) NULL,
   message            TEXT NULL,

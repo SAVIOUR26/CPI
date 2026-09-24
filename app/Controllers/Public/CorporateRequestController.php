@@ -5,6 +5,7 @@ namespace App\Controllers\Public;
 use App\Core\Controller;
 use App\Core\Mailer;
 use App\Core\Request;
+use App\Support\Institute;
 use App\Models\Course;
 use App\Models\CorporateRequest;
 use App\Models\Setting;
@@ -35,7 +36,7 @@ class CorporateRequestController extends Controller
             'topic' => 'required|max:190',
             'headcount' => 'numeric',
             'location' => 'max:190',
-            'mode' => 'required|in:online,in_person,hybrid',
+            'mode' => 'required|in:' . implode(',', array_keys(Institute::MODES)),
             'preferred_dates' => 'max:190',
             'message' => 'max:2000',
         ]);

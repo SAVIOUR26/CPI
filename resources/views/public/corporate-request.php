@@ -4,7 +4,7 @@
   'title' => 'Request training for your organization',
   'lead' => 'Tell us what your team needs and we\'ll come back with a tailored proposal and quote.',
   'crumbs' => [['label' => 'Corporate Training', 'href' => '/corporate-training'], ['label' => 'Request']],
-  'stats' => [['icon' => 'fa-people-group', 'text' => 'Any group size'], ['icon' => 'fa-house-laptop', 'text' => 'In-person, online or hybrid'], ['icon' => 'fa-file-invoice', 'text' => 'Free proposal & quote']],
+  'stats' => [['icon' => 'fa-people-group', 'text' => 'Any group size'], ['icon' => 'fa-house-laptop', 'text' => 'On-site, in-house or online'], ['icon' => 'fa-file-invoice', 'text' => 'Free proposal & quote']],
 ]); ?>
 <section class="section">
   <div class="container">
@@ -59,11 +59,11 @@
             <input type="number" name="headcount" min="1" value="<?= e(old('headcount')) ?>">
           </div>
           <div class="form-group">
-            <label>Preferred mode</label>
-            <select name="mode">
-              <option value="in_person">In person</option>
-              <option value="online">Online</option>
-              <option value="hybrid">Hybrid</option>
+            <label for="mode">Preferred training mode</label>
+            <select id="mode" name="mode">
+              <?php foreach (\App\Support\Institute::MODES as $value => [$label]): ?>
+                <option value="<?= e($value) ?>"<?= (old('mode') ?: 'onsite') === $value ? ' selected' : '' ?>><?= e($label) ?></option>
+              <?php endforeach; ?>
             </select>
           </div>
           <div class="form-group">
