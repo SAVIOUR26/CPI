@@ -3,6 +3,7 @@
 /** @var array|null $auth_user */
 /** @var string[] $auth_roles */
 use App\Core\Auth;
+use App\Support\Institute;
 
 $pageTitle = $pageTitle ?? 'Crawford Professionals Institute (CPI)';
 $metaDescription = $metaDescription ?? 'Crawford Professionals Institute (CPI), Kampala — practical professional training, capacity building and customized corporate training for professionals across Africa.';
@@ -34,6 +35,21 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="<?= asset('css/app.css') ?>">
 <script>document.documentElement.classList.add('js');</script>
+<?php if ($path === '/'): ?>
+<script type="application/ld+json"><?= json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'EducationalOrganization',
+    'name' => 'Crawford Professionals Institute',
+    'alternateName' => 'CPI',
+    'url' => url('/'),
+    'logo' => url('/assets/img/logo.png'),
+    'email' => Institute::EMAIL,
+    'telephone' => Institute::PHONES[0],
+    'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Kampala', 'addressCountry' => 'UG'],
+    'areaServed' => [['@type' => 'Country', 'name' => 'Uganda'], ['@type' => 'Place', 'name' => 'Africa']],
+    'contactPoint' => array_map(fn ($phone) => ['@type' => 'ContactPoint', 'telephone' => $phone, 'contactType' => 'customer service', 'areaServed' => 'UG'], Institute::PHONES),
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?></script>
+<?php endif; ?>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
@@ -41,14 +57,16 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
 <div class="topbar">
   <div class="container topbar-inner">
     <div class="topbar-group info">
-      <span><i class="fa-solid fa-location-dot"></i> Kampala, Uganda</span>
-      <a href="mailto:info@crawfordinstitute.online"><i class="fa-solid fa-envelope"></i> info@crawfordinstitute.online</a>
+      <span><i class="fa-solid fa-location-dot"></i> <?= e(Institute::LOCATION) ?></span>
+      <a href="<?= e(Institute::tel(Institute::PHONES[0])) ?>"><i class="fa-solid fa-phone"></i> <?= e(Institute::PHONES[0]) ?></a>
+      <a href="<?= e(Institute::whatsappUrl()) ?>" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <?= e(Institute::WHATSAPP) ?></a>
+      <a href="mailto:<?= e(Institute::EMAIL) ?>" class="tb-wide"><i class="fa-solid fa-envelope"></i> <?= e(Institute::EMAIL) ?></a>
     </div>
     <div class="topbar-group">
       <a href="/student-portal"><i class="fa-solid fa-user-graduate"></i> Student Portal</a>
       <a href="/lecturer-portal"><i class="fa-solid fa-chalkboard-user"></i> Lecturer Portal</a>
       <a href="/verify"><i class="fa-solid fa-shield-halved"></i> Verify a Certificate</a>
-      <a href="/corporate/request"><i class="fa-solid fa-handshake"></i> Corporate Enquiries</a>
+      <a href="/corporate/request" class="tb-wide"><i class="fa-solid fa-handshake"></i> Corporate Enquiries</a>
     </div>
   </div>
 </div>
@@ -106,6 +124,8 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
       <div class="nav-portals">
         <a href="/student-portal"><i class="fa-solid fa-user-graduate"></i> Student Portal</a>
         <a href="/lecturer-portal"><i class="fa-solid fa-chalkboard-user"></i> Lecturer Portal</a>
+        <a href="<?= e(Institute::tel(Institute::PHONES[0])) ?>"><i class="fa-solid fa-phone"></i> Call us</a>
+        <a href="<?= e(Institute::whatsappUrl()) ?>" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
       </div>
       <div class="nav-actions">
         <?php if (Auth::check()): ?>
@@ -167,9 +187,12 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
       </div>
       <div>
         <h4>Get in touch</h4>
-        <p class="contact-line"><i class="fa-solid fa-location-dot"></i> <span>Kampala, Uganda</span></p>
-        <p class="contact-line"><i class="fa-solid fa-envelope"></i> <a href="mailto:info@crawfordinstitute.online">info@crawfordinstitute.online</a></p>
-        <p class="contact-line"><i class="fa-solid fa-comments"></i> <a href="/contact">Send us a message</a></p>
+        <p class="contact-line"><i class="fa-solid fa-location-dot"></i> <span><?= e(Institute::LOCATION) ?></span></p>
+        <p class="contact-line"><i class="fa-solid fa-earth-africa"></i> <span>Training coverage: <?= e(Institute::COVERAGE) ?></span></p>
+        <p class="contact-line"><i class="fa-solid fa-phone"></i> <span>
+          <?php foreach (Institute::PHONES as $n => $phone): ?><?= $n ? '<br>' : '' ?><a href="<?= e(Institute::tel($phone)) ?>"><?= e($phone) ?></a><?php endforeach; ?></span></p>
+        <p class="contact-line"><i class="fa-brands fa-whatsapp"></i> <a href="<?= e(Institute::whatsappUrl()) ?>" target="_blank" rel="noopener">WhatsApp <?= e(Institute::WHATSAPP) ?></a></p>
+        <p class="contact-line"><i class="fa-solid fa-envelope"></i> <a href="mailto:<?= e(Institute::EMAIL) ?>"><?= e(Institute::EMAIL) ?></a></p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -179,6 +202,10 @@ $programmeActive = $isActive('/professional-training') || $isActive('/capacity-b
   </div>
 </footer>
 
+<?php if (!str_starts_with($path, '/academic/apply')): ?>
+<a href="<?= e(Institute::whatsappUrl()) ?>" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat with CPI on WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i><span>Chat with us</span></a>
+<?php endif; ?>
 <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 <script src="<?= asset('js/app.js') ?>" defer></script>
 </body>

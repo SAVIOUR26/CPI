@@ -161,7 +161,8 @@ class CorporateRequestController extends Controller
             'course_id' => $courseId,
             'organization_id' => $organizationId,
             'code' => $code,
-            'mode' => $cr['mode'],
+            // Cohorts are online, physical or hybrid; on-site and in-house training is delivered in person.
+            'mode' => in_array($cr['mode'], ['online', 'in_person', 'hybrid'], true) ? $cr['mode'] : 'in_person',
             'venue' => $cr['location'],
             'start_date' => $request->input('start_date', date('Y-m-d', strtotime('+2 weeks'))),
             'capacity' => $cr['headcount'],

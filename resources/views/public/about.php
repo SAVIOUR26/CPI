@@ -3,7 +3,7 @@
   'title' => 'About Crawford Professionals Institute',
   'lead' => 'A professional training and capacity-building institution equipping individuals and organizations with practical, industry-relevant skills.',
   'crumbs' => [['label' => 'About']],
-  'stats' => [['icon' => 'fa-location-dot', 'text' => 'Kampala, Uganda'], ['icon' => 'fa-earth-africa', 'text' => 'Serving professionals across Africa']],
+  'stats' => [['icon' => 'fa-location-dot', 'text' => \App\Support\Institute::LOCATION], ['icon' => 'fa-earth-africa', 'text' => 'Training coverage: ' . \App\Support\Institute::COVERAGE]],
 ]); ?>
 <section class="section">
   <div class="container" style="max-width:860px">
@@ -68,6 +68,12 @@
         <div class="card value-card" data-reveal style="--i:<?= $n % 3 ?>"><span class="f-icon"><i class="fa-solid <?= $advIcons[$n] ?? 'fa-check' ?>"></i></span><p><?= e($a) ?></p></div>
       <?php endforeach; ?>
     </div>
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="container">
+    <?php \App\Core\View::partial('partials.training-modes', ['intro' => 'Flexible delivery for individuals and organizations, in Uganda and across Africa.']); ?>
   </div>
 </section>
 

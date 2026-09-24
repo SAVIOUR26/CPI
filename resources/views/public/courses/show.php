@@ -31,7 +31,7 @@ foreach ($pillars as $p) { $stats[] = ['icon' => pillar_icon($p['slug']), 'text'
             <div class="intake-top"><h3><?= e($i['code']) ?></h3><span class="status status-open">Open</span></div>
             <ul class="intake-facts">
               <li><i class="fa-regular fa-calendar"></i>Starts <?= date_pretty($i['start_date']) ?></li>
-              <li><i class="fa-solid fa-laptop"></i><?= e(ucfirst(str_replace('_', ' ', $i['mode']))) ?></li>
+              <li><i class="fa-solid fa-laptop"></i><?= e(\App\Support\Institute::modeLabel($i['mode'], true)) ?></li>
               <?php if ($i['venue']): ?><li><i class="fa-solid fa-location-dot"></i><?= e($i['venue']) ?></li><?php endif; ?>
               <li><i class="fa-solid fa-tag"></i><?= e(course_price($course)) ?></li>
             </ul>

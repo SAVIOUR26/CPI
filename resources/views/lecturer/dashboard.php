@@ -19,7 +19,7 @@
       <h3><?= e($i['course_title']) ?></h3>
       <div class="class-meta">
         <span><i class="fa-regular fa-calendar"></i><?= date_pretty($i['start_date']) ?></span>
-        <span><i class="fa-solid fa-location-dot"></i><?= e(ucfirst(str_replace('_', ' ', $i['mode']))) ?></span>
+        <span><i class="fa-solid fa-location-dot"></i><?= e(\App\Support\Institute::modeLabel($i['mode'], true)) ?></span>
         <span><i class="fa-solid fa-users"></i><?= (int) $i['seats_taken'] ?><?= $i['capacity'] ? ' / ' . (int) $i['capacity'] : '' ?> seats</span>
       </div>
       <span class="link-arrow">Open class <i class="fa-solid fa-arrow-right"></i></span>

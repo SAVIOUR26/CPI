@@ -67,7 +67,7 @@
         <tr>
           <td><?= e($i['code']) ?></td>
           <td><?= date_pretty($i['start_date']) ?></td>
-          <td><?= e(str_replace('_',' ',$i['mode'])) ?></td>
+          <td><?= e(\App\Support\Institute::modeLabel($i['mode'], true)) ?></td>
           <td><?= (int) $i['seats_taken'] ?><?= $i['capacity'] ? ' / ' . (int) $i['capacity'] : '' ?></td>
           <td>
             <form method="post" action="/admin/intakes/<?= (int) $i['id'] ?>/status" style="display:flex;gap:6px;flex-wrap:wrap">
@@ -100,7 +100,7 @@
       <div class="grid-2">
         <div class="form-group"><label>Code</label><input type="text" name="code" placeholder="NOV-2026-WEEKEND" required></div>
         <div class="form-group"><label>Mode</label>
-          <select name="mode"><option value="online">Online</option><option value="in_person">In person</option><option value="hybrid">Hybrid</option></select>
+          <select name="mode"><option value="online">Online</option><option value="in_person">Physical (training venue)</option><option value="hybrid">Hybrid</option></select>
         </div>
         <div class="form-group"><label>Venue</label><input type="text" name="venue"></div>
         <div class="form-group"><label>Capacity</label><input type="number" name="capacity"></div>
