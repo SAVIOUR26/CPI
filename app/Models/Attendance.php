@@ -26,20 +26,4 @@ class Attendance extends Model
             [$intakeId, $userId, $date, $status, $markedBy]
         );
     }
-
-    public static function rateFor(int $intakeId, int $userId): float
-    {
-        $rows = static::query(
-            'SELECT
-                SUM(status IN ("present","late")) as attended,
-                COUNT(*) as total
-             FROM attendance WHERE intake_id = ? AND user_id = ?',
-            [$intakeId, $userId]
-        );
-        $total = (int) ($rows[0]['total'] ?? 0);
-        if ($total === 0) {
-            return 0;
-        }
-        return round(((int) $rows[0]['attended'] / $total) * 100, 1);
-    }
 }

@@ -2,13 +2,11 @@
 
 namespace App\Controllers\Admin;
 
-use App\Controllers\Academic\GatewayController;
 use App\Core\AuditLog;
 use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Mailer;
 use App\Core\Request;
-use App\Core\Upload;
 use App\Models\AcademicApplication;
 use App\Models\AcademicProgramme;
 use App\Models\Course;
@@ -16,8 +14,8 @@ use App\Models\CourseCategory;
 use App\Models\Enrollment;
 use App\Models\FeeLedger;
 use App\Models\Intake;
-use App\Models\Timetable;
 use App\Models\User;
+use App\Support\ApplicationDocuments;
 use App\Support\NewAccounts;
 use App\Support\Str;
 
@@ -212,7 +210,7 @@ class AcademicController extends Controller
             'level' => AcademicProgramme::levels()[$programme['award_level']] ?? null,
             'intakes' => $intakes,
             'form' => $form,
-            'documents' => $this->documentList($app, $form),
+            'documents' => ApplicationDocuments::list($app, '/admin/academic/applications/' . (int) $app['id'] . '/files/'),
             'reviewer' => $app['reviewed_by'] ? User::find((int) $app['reviewed_by']) : null,
         ], 'layouts.dashboard');
     }
@@ -222,81 +220,24 @@ class AcademicController extends Controller
     {
         $this->requirePermission('admissions.manage');
         $app = $this->findApplication((int) $request->param('application'));
-        if (!$app['documents_path'] || !Upload::exists($app['documents_path'])) {
+        $path = ApplicationDocuments::path($app, 'legacy', 0);
+        if (!$path) {
             $this->abort(404, 'Documents not found.');
         }
-        $this->sendDocument($app['documents_path'], 'application-' . $app['id']);
+        ApplicationDocuments::send($path, 'application-' . $app['id']);
     }
 
     public function applicationFile(Request $request): void
     {
         $this->requirePermission('admissions.manage');
         $app = $this->findApplication((int) $request->param('application'));
-        $form = json_decode((string) $app['form_data'], true) ?: [];
         $key = (string) $request->param('key');
         $index = max(0, (int) $request->input('i', 0));
-
-        if ($key === 'qualification') {
-            $path = $form['qualifications'][$index]['document'] ?? null;
-        } elseif (isset(GatewayController::DOCUMENTS[$key])) {
-            $entry = (json_decode((string) $app['documents'], true) ?: [])[$key] ?? null;
-            $path = is_array($entry) ? ($entry[$index] ?? null) : ($index === 0 ? $entry : null);
-        } else {
-            $path = null;
-        }
-        // Paths are written by GatewayController; check the shape anyway before touching the filesystem.
-        if (!is_string($path) || !preg_match('#^academic-applications/[a-f0-9]{32}\.(pdf|jpe?g|png)$#', $path) || !Upload::exists($path)) {
+        $path = ApplicationDocuments::path($app, $key, $index);
+        if (!$path) {
             $this->abort(404, 'Document not found.');
         }
-        $name = ($app['application_no'] ?: 'application-' . $app['id']) . '-' . str_replace('_', '-', $key) . ($index ? '-' . ($index + 1) : '');
-        $this->sendDocument($path, $name);
-    }
-
-    private function sendDocument(string $path, string $downloadName): void
-    {
-        $file = Upload::absolutePath($path);
-        $ext = strtolower(pathinfo($path, PATHINFO_EXTENSION));
-        header('Content-Type: ' . Upload::mimeFor($path));
-        header('Content-Length: ' . filesize($file));
-        header('Content-Disposition: inline; filename="' . preg_replace('/[^A-Za-z0-9._-]/', '-', $downloadName) . '.' . $ext . '"');
-        header('X-Content-Type-Options: nosniff');
-        header('Cache-Control: private, no-store');
-        readfile($file);
-        exit;
-    }
-
-    /** Every uploaded file on an application, for the review screen. */
-    private function documentList(array $app, array $form): array
-    {
-        $base = '/admin/academic/applications/' . (int) $app['id'] . '/files/';
-        $stored = json_decode((string) $app['documents'], true) ?: [];
-        $list = [];
-        foreach (GatewayController::DOCUMENTS as $key => [$label]) {
-            $paths = isset($stored[$key]) ? (array) $stored[$key] : [];
-            foreach (array_values($paths) as $i => $path) {
-                $list[] = [
-                    'key' => $key,
-                    'label' => $label . (count($paths) > 1 ? ' (' . ($i + 1) . ')' : ''),
-                    'url' => $base . $key . ($i ? '?i=' . $i : ''),
-                    'ext' => strtoupper(pathinfo((string) $path, PATHINFO_EXTENSION)),
-                ];
-            }
-        }
-        foreach ($form['qualifications'] ?? [] as $i => $q) {
-            if (!empty($q['document'])) {
-                $list[] = [
-                    'key' => 'qualification',
-                    'label' => trim(($q['qualification'] ?: 'Qualification') . ($q['institution'] ? ' — ' . $q['institution'] : '')),
-                    'url' => $base . 'qualification?i=' . $i,
-                    'ext' => strtoupper(pathinfo((string) $q['document'], PATHINFO_EXTENSION)),
-                ];
-            }
-        }
-        if (!empty($app['documents_path'])) {
-            $list[] = ['key' => 'legacy', 'label' => 'Submitted documents', 'url' => '/admin/academic/applications/' . (int) $app['id'] . '/documents',
-                       'ext' => strtoupper(pathinfo((string) $app['documents_path'], PATHINFO_EXTENSION))];
-        }
-        return $list;
+        ApplicationDocuments::send($path, ApplicationDocuments::downloadName($app, $key, $index));
     }
 
     private function findApplication(int $id): array
@@ -440,31 +381,6 @@ class AcademicController extends Controller
         ]);
 
         $this->flash('success', 'Fee ledger entry added.');
-        $this->back();
-    }
-
-    public function addTimetableEntry(Request $request): void
-    {
-        $this->requirePermission('academic.manage');
-        $this->verifyCsrf($request);
-
-        $data = $this->validate($request, [
-            'intake_id' => 'required|integer',
-            'day_of_week' => 'required|integer',
-            'start_time' => 'required',
-            'end_time' => 'required',
-        ]);
-
-        Timetable::insert([
-            'intake_id' => $data['intake_id'],
-            'day_of_week' => $data['day_of_week'],
-            'start_time' => $data['start_time'],
-            'end_time' => $data['end_time'],
-            'venue' => $request->input('venue'),
-            'lecturer_id' => $request->input('lecturer_id') ?: null,
-        ]);
-
-        $this->flash('success', 'Timetable entry added.');
         $this->back();
     }
 

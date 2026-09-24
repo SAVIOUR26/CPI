@@ -6,14 +6,15 @@ use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Upload;
+use App\Models\Announcement;
 use App\Models\Assignment;
-use App\Models\Attendance;
 use App\Models\Discussion;
 use App\Models\Enrollment;
-use App\Models\Grade;
 use App\Models\Intake;
 use App\Models\Material;
 use App\Models\Quiz;
+use App\Models\Timetable;
+use App\Support\Results;
 
 class CourseRoomController extends Controller
 {
@@ -34,11 +35,6 @@ class CourseRoomController extends Controller
         $intake = Intake::withCourse($intakeId);
         $materials = Material::forIntake($intakeId);
         $assignments = Assignment::forIntake($intakeId);
-        $quizzes = Quiz::forIntake($intakeId);
-        $discussions = Discussion::forIntake($intakeId);
-        $grades = Grade::forUserInIntake($intakeId, (int) $user['id']);
-        $average = Grade::averageFor($intakeId, (int) $user['id']);
-        $attendanceRate = Attendance::rateFor($intakeId, (int) $user['id']);
 
         $submissions = [];
         foreach ($assignments as $a) {
@@ -48,14 +44,15 @@ class CourseRoomController extends Controller
         $this->view('learner.course-room', [
             'pageTitle' => ($intake['course_title'] ?? 'Course') . ' — CPI',
             'intake' => $intake,
-            'materials' => $materials,
+            'announcements' => Announcement::forIntake($intakeId),
+            'videos' => array_values(array_filter($materials, fn ($m) => $m['type'] === 'video')),
+            'resources' => array_values(array_filter($materials, fn ($m) => $m['type'] !== 'video')),
             'assignments' => $assignments,
             'submissions' => $submissions,
-            'quizzes' => $quizzes,
-            'discussions' => $discussions,
-            'grades' => $grades,
-            'average' => $average,
-            'attendanceRate' => $attendanceRate,
+            'quizzes' => Quiz::forIntake($intakeId),
+            'discussions' => Discussion::forIntake($intakeId),
+            'results' => Results::forStudent($intakeId, (int) $user['id']),
+            'timetable' => Timetable::forIntake($intakeId),
         ], 'layouts.dashboard');
     }
 

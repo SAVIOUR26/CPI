@@ -8,6 +8,17 @@ class Intake extends Model
 {
     protected static string $table = 'intakes';
 
+    /** Classes for admin pick-lists (announcements, calendar), newest first. */
+    public static function forSelect(): array
+    {
+        return static::query(
+            'SELECT i.id, i.code, i.start_date, i.status, c.title AS course_title
+             FROM intakes i JOIN courses c ON c.id = i.course_id
+             WHERE i.status <> "cancelled"
+             ORDER BY i.start_date DESC, i.id DESC'
+        );
+    }
+
     public static function withCourse(int $id): ?array
     {
         $rows = static::query(

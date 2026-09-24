@@ -36,6 +36,15 @@ class User extends Model
         return array_column($rows, 'slug');
     }
 
+    /** Everyone with the lecturer role, for pick-lists. */
+    public static function lecturers(): array
+    {
+        return static::query(
+            "SELECT u.id, u.full_name FROM users u JOIN role_user ru ON ru.user_id = u.id JOIN roles r ON r.id = ru.role_id
+             WHERE r.slug = 'lecturer' ORDER BY u.full_name"
+        );
+    }
+
     public static function assignRole(int $userId, string $roleSlug): void
     {
         $role = static::query('SELECT id FROM roles WHERE slug = ?', [$roleSlug]);

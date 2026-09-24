@@ -36,6 +36,39 @@
 </div>
 <?php endif; ?>
 
+<?php
+$appLabels = ['submitted' => 'Received', 'under_review' => 'Under review', 'admitted' => 'Admitted', 'rejected' => 'Not admitted'];
+?>
+<?php if ($applications): $app = $applications[0]; ?>
+  <a href="/learner/admission" class="admission-strip">
+    <span class="stat-icon tone-purple"><i class="fa-solid fa-building-columns"></i></span>
+    <span><small>My admission · <?= e($app['application_no'] ?: '') ?></small><strong><?= e($app['programme_title']) ?></strong></span>
+    <span class="status status-<?= e($app['status']) ?>"><?= e($appLabels[$app['status']] ?? $app['status']) ?></span>
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
+<?php endif; ?>
+
+<?php if ($announcements || $dates): ?>
+<div class="grid-2 dash-duo">
+  <div class="panel">
+    <div class="panel-head"><h2><i class="fa-solid fa-bullhorn"></i> Announcements</h2><a href="/learner/announcements">View all</a></div>
+    <div class="panel-body">
+      <?php if ($announcements): ?>
+        <?php \App\Core\View::partial('partials.portal.announcements', ['announcements' => $announcements, 'showAudience' => true]); ?>
+      <?php else: ?><p class="muted" style="margin:0">No announcements yet.</p><?php endif; ?>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2><i class="fa-solid fa-calendar-days"></i> Coming up</h2><a href="/learner/calendar">Full calendar</a></div>
+    <div class="panel-body">
+      <?php if ($dates): ?>
+        <?php \App\Core\View::partial('partials.portal.dates', ['events' => $dates]); ?>
+      <?php else: ?><p class="muted" style="margin:0">No upcoming dates.</p><?php endif; ?>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
 <h2>My active courses</h2>
 <div class="grid-3" style="margin-bottom:28px">
   <?php foreach ($active as $e): ?>
@@ -56,21 +89,7 @@
 
 <?php if ($timetable): ?>
 <div class="panel">
-  <div class="panel-head"><h2><i class="fa-solid fa-calendar-days"></i> Upcoming classes</h2></div>
-  <div class="table-card">
-    <table>
-      <thead><tr><th>Course</th><th>Day</th><th>Time</th><th>Venue</th></tr></thead>
-      <tbody>
-      <?php foreach ($timetable as $t): ?>
-        <tr>
-          <td><?= e($t['course_title']) ?></td>
-          <td><?= e(\App\Models\Timetable::dayName((int) $t['day_of_week'])) ?></td>
-          <td><?= e(substr($t['start_time'], 0, 5)) ?>–<?= e(substr($t['end_time'], 0, 5)) ?></td>
-          <td><?= e($t['venue'] ?? '—') ?></td>
-        </tr>
-      <?php endforeach; ?>
-      </tbody>
-    </table>
-  </div>
+  <div class="panel-head"><h2><i class="fa-solid fa-calendar-week"></i> Weekly timetable</h2><a href="/learner/calendar">Calendar</a></div>
+  <?php \App\Core\View::partial('partials.portal.timetable', ['timetable' => $timetable, 'showCourse' => true]); ?>
 </div>
 <?php endif; ?>

@@ -5,6 +5,9 @@ namespace App\Controllers\Learner;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Upload;
+use App\Models\AcademicApplication;
+use App\Models\Announcement;
+use App\Models\CalendarEvent;
 use App\Models\Certificate;
 use App\Models\Enrollment;
 use App\Models\FeeLedger;
@@ -28,6 +31,9 @@ class DashboardController extends Controller
             'pending' => $pending,
             'certificates' => array_slice($certificates, 0, 3),
             'timetable' => array_slice($timetable, 0, 5),
+            'announcements' => Announcement::forStudent((int) $user['id'], 3),
+            'dates' => CalendarEvent::forStudent((int) $user['id'], date('Y-m-d'), 4),
+            'applications' => AcademicApplication::forUser((int) $user['id']),
         ], 'layouts.dashboard');
     }
 

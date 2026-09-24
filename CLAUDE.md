@@ -147,6 +147,24 @@ read through:
   it under **My account**, which every portal has (`/admin/account`,
   `/lecturer/account`, `/corporate/portal/account`, `/learner/profile`);
   changing the sign-in email there needs the current password.
+- The client's portal brief (`docs/content/portals/`, mapped item by item
+  in `docs/content/README.md`), run in a browser as admin, lecturer and
+  student: admin posts announcements to everyone, students, lecturers or
+  one class (Admin → Announcements) and adds key dates and weekly class
+  times (Admin → Calendar & Timetable); each lands only with the right
+  people (a class awaiting payment, another class's dates and past dates
+  stay hidden). The lecturer posts class announcements, adds YouTube and
+  Vimeo lectures that play inside the student's class page (`javascript:`
+  links and videos without a link are refused), marks attendance, records
+  a grade, and grades a submission with feedback (regrading keeps one
+  mark). The student sees it all under Announcements, Academic Calendar,
+  the class page and **My Results** (quiz auto-graded; average = mean of
+  the percentages), and the lecturer's class list shows each student's
+  average, attendance and standing. **My Admission** shows an admitted
+  student's applications, their own uploaded documents and a printable
+  admission letter (one A4 page); another applicant's letter or documents
+  are 404. Applying while signed in links the application to the account
+  only when the form's email is the account's own.
 - Real content import: `schema.sql` → `seed.sql` → `seed_courses.sql`
   imported into a **freshly created** database with zero errors; the
   public `/courses` catalogue lists all 184 real courses, `/corporate-
@@ -225,6 +243,26 @@ sending — confirm this is not still the case once deployed).
 - **Database times use `APP_TIMEZONE`.** `Database::connection()` sets the
   MySQL session time zone to PHP's offset, so `NOW()`/`CURRENT_TIMESTAMP`
   match PHP's `date()` regardless of the hosting server's own clock.
+
+- **Marks come from one place.** `App\Support\Results` builds a student's
+  marks for a class (assignment grades, grades the lecturer records, the
+  best submitted attempt at each quiz/exam) and attendance; the class page,
+  My Results and the lecturer's class list all use it. Assignment grades
+  are stored in `grades` as `component = 'assignment:{id}'`, one row per
+  student (regrading replaces it).
+
+- **Lecture videos are links, not uploads.** Shared hosting can't take
+  video files, so lecturers paste YouTube (Unlisted), Vimeo or Google
+  Drive links; `App\Support\Video::embedUrl()` turns those into player
+  URLs and anything else opens in a new tab. Only `http(s)` links are
+  accepted or rendered.
+
+- **Application documents are served by `App\Support\ApplicationDocuments`**
+  for both the admin review screen and the student's My Admission page. My
+  Admission only lists applications whose `user_id` is the signed-in user
+  (set when admitted, or when someone applies while signed in with their
+  own email) — never matched by email, because registration doesn't
+  verify email addresses.
 
 ## Repo hygiene
 

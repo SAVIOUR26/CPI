@@ -12,7 +12,12 @@ class Timetable extends Model
 
     public static function forIntake(int $intakeId): array
     {
-        return static::query('SELECT * FROM timetable_entries WHERE intake_id = ? ORDER BY day_of_week, start_time', [$intakeId]);
+        return static::query(
+            'SELECT t.*, u.full_name AS lecturer_name FROM timetable_entries t
+             LEFT JOIN users u ON u.id = t.lecturer_id
+             WHERE t.intake_id = ? ORDER BY t.day_of_week, t.start_time',
+            [$intakeId]
+        );
     }
 
     public static function forUser(int $userId): array
@@ -26,6 +31,12 @@ class Timetable extends Model
              ORDER BY t.day_of_week, t.start_time',
             [$userId]
         );
+    }
+
+    /** 1 => 'Monday' … 7 => 'Sunday' */
+    public static function days(): array
+    {
+        return self::DAYS;
     }
 
     public static function dayName(int $day): string

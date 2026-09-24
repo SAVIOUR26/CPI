@@ -5,6 +5,8 @@ namespace App\Controllers\Lecturer;
 use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Request;
+use App\Models\Announcement;
+use App\Models\CalendarEvent;
 use App\Models\Intake;
 
 class DashboardController extends Controller
@@ -17,6 +19,8 @@ class DashboardController extends Controller
         $this->view('lecturer.dashboard', [
             'pageTitle' => 'My Classes — CPI',
             'intakes' => $intakes,
+            'announcements' => Announcement::forLecturers(3),
+            'dates' => CalendarEvent::forLecturer((int) Auth::id(), date('Y-m-d'), 4),
         ], 'layouts.dashboard');
     }
 }

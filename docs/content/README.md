@@ -65,3 +65,34 @@ programme if any programme is awarded by it rather than TEAM University.
 The welcome message file is a macro-enabled Word document (`.docm`). No
 macros were present or executed — it was read as plain zipped XML (same
 format as `.docx`) purely for its text content.
+
+## Student and Lecturer portals (`portals/`, supplied 2026-09-24)
+
+`STUDENT  and lecture PORTAL DASHBORD CONTENT.doc` (the client's file name,
+kept as sent) lists what each portal should hold. Both portals sign people
+in with details from the administrator: an admin creates lecturer accounts
+in Users & Roles, and student accounts come from registration, admission or
+bulk enrolment. The temporary password is shown to the admin once.
+
+| Brief item | Where it lives |
+|---|---|
+| **Student:** My Courses | `/learner/courses` and each class page (`/learner/courses/{intake}`) |
+| Lecture materials, Videos | Class page → Materials and Lecture videos. YouTube, Vimeo and Google Drive links play inside the page (`App\Support\Video`) |
+| Assignments, Quizzes, Examinations | Class page → Assignments (submit work, see the score and feedback) and Quizzes & exams (auto-graded) |
+| Results | `/learner/results` (every class, printable) and the class page's Results section (`App\Support\Results`) |
+| Academic Calendar | `/learner/calendar`: key dates from Admin → Calendar & Timetable plus the student's weekly class times |
+| Announcements | `/learner/announcements` and the dashboard: institute-wide notices from Admin → Announcements and class notices from lecturers |
+| Fees and Payments | `/learner/fees` |
+| Admission Documents | `/learner/admission`: application number, programme, status, the documents the student uploaded and a printable admission letter once admitted |
+| Certificates | `/learner/certificates` |
+| Student Profile | `/learner/profile` (My account) |
+| **Lecturer:** Upload materials and lecture videos | Class page → Add material or video |
+| Create assignments and quizzes, conduct assessments | Class page → Assignments, Quizzes & exams, and Record a grade for work marked outside the portal |
+| Grade students | Assignment submissions (score and feedback), quiz results, recorded grades |
+| Record attendance | Class page → Attendance |
+| Monitor student performance | Class page → Students & performance: each student's average, attendance and standing |
+| Communicate with students | Class page → Class announcements and Class discussion |
+
+The `.doc` is the old binary Word format with no macros (the file has no
+`Macros`/`VBA` storage). Its text was read with `strings`, as LibreOffice
+could not open it in the build environment.
