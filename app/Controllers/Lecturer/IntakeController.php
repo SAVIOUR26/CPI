@@ -6,6 +6,7 @@ use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Upload;
+use App\Models\Announcement;
 use App\Models\Assignment;
 use App\Models\Attendance;
 use App\Models\Discussion;
@@ -13,6 +14,9 @@ use App\Models\Grade;
 use App\Models\Intake;
 use App\Models\Material;
 use App\Models\Quiz;
+use App\Models\Timetable;
+use App\Support\Results;
+use App\Support\Video;
 
 class IntakeController extends Controller
 {
@@ -56,6 +60,9 @@ class IntakeController extends Controller
             'pageTitle' => ($intake['course_title'] ?? 'Class') . ' — CPI',
             'intake' => $intake,
             'roster' => $roster,
+            'performance' => Results::classSummary($intakeId),
+            'announcements' => Announcement::forIntake($intakeId),
+            'timetable' => Timetable::forIntake($intakeId),
             'materials' => $materials,
             'assignments' => $assignments,
             'quizzes' => $quizzes,
@@ -71,11 +78,21 @@ class IntakeController extends Controller
         $user = $this->authorizeIntake($intakeId);
         $this->verifyCsrf($request);
 
-        $type = $request->input('type', 'note');
+        $type = in_array($request->input('type'), ['note', 'video', 'link'], true) ? $request->input('type') : 'note';
         $title = trim((string) $request->input('title'));
-        $videoUrl = $request->input('video_url');
+        $videoUrl = trim((string) $request->input('video_url'));
         $body = $request->input('body');
         $path = null;
+
+        // Links are shown to students, so only real web addresses are accepted.
+        if ($videoUrl !== '' && !Video::isWebUrl($videoUrl)) {
+            $this->flash('error', 'Please paste a full web address starting with https://');
+            $this->redirect('/lecturer/classes/' . $intakeId . '#materials');
+        }
+        if ($type === 'video' && $videoUrl === '') {
+            $this->flash('error', 'Paste the video\'s YouTube, Vimeo or Google Drive link.');
+            $this->redirect('/lecturer/classes/' . $intakeId . '#materials');
+        }
 
         $file = $request->file('file');
         if ($file) {
@@ -93,13 +110,15 @@ class IntakeController extends Controller
             'type' => $type,
             'title' => $title ?: 'Untitled material',
             'file_path' => $path,
-            'video_url' => $type === 'video' ? $videoUrl : null,
+            'video_url' => $type !== 'note' && $videoUrl !== '' ? $videoUrl : null,
             'body' => $body,
             'uploaded_by' => $user['id'],
         ]);
 
-        $this->flash('success', 'Material added.');
-        $this->redirect('/lecturer/classes/' . $intakeId);
+        $this->flash('success', $type === 'video'
+            ? (Video::embedUrl($videoUrl) ? 'Video added — students can watch it on the class page.' : 'Video link added. Only YouTube, Vimeo and Google Drive videos play inside the page; this one opens in a new tab.')
+            : 'Material added.');
+        $this->redirect('/lecturer/classes/' . $intakeId . '#materials');
     }
 
     public function createAssignment(Request $request): void
@@ -180,13 +199,22 @@ class IntakeController extends Controller
         $this->verifyCsrf($request);
 
         $score = (float) $request->input('score');
-        $feedback = $request->input('feedback');
+        $feedback = trim((string) $request->input('feedback')) ?: null;
+        if (!is_numeric($request->input('score')) || $score < 0 || $score > (float) $assignment['max_score']) {
+            $this->flash('error', 'Enter a score between 0 and ' . rtrim(rtrim((string) $assignment['max_score'], '0'), '.') . '.');
+            $this->redirect('/lecturer/assignments/' . $assignment['id'] . '/submissions');
+        }
 
         Assignment::statement(
             'UPDATE assignment_submissions SET score = ?, feedback = ?, graded_by = ?, graded_at = NOW() WHERE id = ?',
             [$score, $feedback, $user['id'], $submissionId]
         );
 
+        // Regrading replaces the earlier mark instead of adding a second one.
+        Grade::statement(
+            'DELETE FROM grades WHERE intake_id = ? AND user_id = ? AND component = ?',
+            [$assignment['intake_id'], $submission['user_id'], 'assignment:' . $assignment['id']]
+        );
         Grade::insert([
             'intake_id' => $assignment['intake_id'],
             'user_id' => $submission['user_id'],
@@ -337,6 +365,42 @@ class IntakeController extends Controller
 
         $this->flash('success', 'Grade recorded.');
         $this->redirect('/lecturer/classes/' . $intakeId);
+    }
+
+    public function postAnnouncement(Request $request): void
+    {
+        $intakeId = (int) $request->param('intake');
+        $user = $this->authorizeIntake($intakeId);
+        $this->verifyCsrf($request);
+        $data = $this->validate($request, ['title' => 'required|max:190', 'body' => 'required|max:5000']);
+
+        Announcement::insert([
+            'intake_id' => $intakeId,
+            'audience' => 'students',
+            'title' => trim($data['title']),
+            'body' => trim($data['body']),
+            'pinned' => $request->input('pinned') ? 1 : 0,
+            'created_by' => $user['id'],
+        ]);
+        $this->flash('success', 'Announcement posted to the class.');
+        $this->redirect('/lecturer/classes/' . $intakeId . '#announcements');
+    }
+
+    public function deleteAnnouncement(Request $request): void
+    {
+        $announcement = Announcement::find((int) $request->param('announcement'));
+        if (!$announcement || !$announcement['intake_id']) {
+            $this->abort(404, 'Announcement not found.');
+        }
+        $user = $this->authorizeIntake((int) $announcement['intake_id']);
+        $this->verifyCsrf($request);
+        // Lecturers remove their own notices; the admin's are managed under Admin → Announcements.
+        if ((int) $announcement['created_by'] !== (int) $user['id'] && !Auth::hasRole('super_admin')) {
+            $this->abort(403, 'You can only delete announcements you posted.');
+        }
+        Announcement::delete((int) $announcement['id']);
+        $this->flash('success', 'Announcement deleted.');
+        $this->redirect('/lecturer/classes/' . $announcement['intake_id'] . '#announcements');
     }
 
     public function postDiscussion(Request $request): void

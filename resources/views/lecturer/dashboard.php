@@ -12,6 +12,28 @@
   <div class="stat-box"><span class="stat-icon tone-green"><i class="fa-solid fa-users"></i></span><div><div class="num"><?= array_sum(array_map(fn ($i) => (int) $i['seats_taken'], $intakes)) ?></div><div class="label">Learners enrolled</div></div></div>
 </div>
 
+<?php if ($announcements || $dates): ?>
+<div class="grid-2 dash-duo">
+  <div class="panel">
+    <div class="panel-head"><h2><i class="fa-solid fa-bullhorn"></i> From CPI</h2></div>
+    <div class="panel-body">
+      <?php if ($announcements): ?>
+        <?php \App\Core\View::partial('partials.portal.announcements', ['announcements' => $announcements]); ?>
+      <?php else: ?><p class="muted" style="margin:0">No announcements for lecturers.</p><?php endif; ?>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head"><h2><i class="fa-solid fa-calendar-days"></i> Coming up</h2></div>
+    <div class="panel-body">
+      <?php if ($dates): ?>
+        <?php \App\Core\View::partial('partials.portal.dates', ['events' => $dates]); ?>
+      <?php else: ?><p class="muted" style="margin:0">No upcoming dates.</p><?php endif; ?>
+    </div>
+  </div>
+</div>
+<?php endif; ?>
+
+<h2>Your classes</h2>
 <div class="grid-3">
   <?php foreach ($intakes as $i): ?>
     <a href="/lecturer/classes/<?= (int) $i['id'] ?>" class="card class-card">

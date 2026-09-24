@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Academic;
 
+use App\Core\Auth;
 use App\Core\Controller;
 use App\Core\Mailer;
 use App\Core\Request;
@@ -127,7 +128,10 @@ class GatewayController extends Controller
 
         $personal = $form['personal'];
         $applicantName = trim($personal['other_names'] . ' ' . $personal['surname']);
+        // A signed-in applicant applying with their own email sees the application in My Admission straight away.
+        $signedIn = Auth::user();
         $id = AcademicApplication::insert([
+            'user_id' => $signedIn && strtolower($signedIn['email']) === $personal['email'] ? (int) $signedIn['id'] : null,
             'programme_id' => $programmeId,
             'applicant_name' => $applicantName,
             'email' => $personal['email'],

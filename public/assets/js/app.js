@@ -389,6 +389,13 @@
     });
   });
 
+  /* ---------- Confirm deletions ---------- */
+  document.querySelectorAll('form[data-confirm-submit]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      if (!window.confirm(form.getAttribute('data-confirm-submit'))) e.preventDefault();
+    });
+  });
+
   /* ---------- Count-up numbers ---------- */
   function countUp(el) {
     var target = parseInt(el.getAttribute('data-count'), 10);

@@ -4,6 +4,8 @@
 
 use App\Controllers\Academic\GatewayController as AcademicGateway;
 use App\Controllers\Admin\AcademicController as AdminAcademic;
+use App\Controllers\Admin\AnnouncementController as AdminAnnouncement;
+use App\Controllers\Admin\CalendarController as AdminCalendar;
 use App\Controllers\Auth\AccountController as Account;
 use App\Controllers\Admin\CertificateController as AdminCertificate;
 use App\Controllers\Admin\CorporateRequestController as AdminCorporateRequest;
@@ -16,6 +18,7 @@ use App\Controllers\Admin\UserController as AdminUser;
 use App\Controllers\Corporate\PortalController as CorporatePortal;
 use App\Controllers\Learner\CourseRoomController;
 use App\Controllers\Learner\DashboardController as LearnerDashboard;
+use App\Controllers\Learner\PortalController as LearnerPortal;
 use App\Controllers\Lecturer\DashboardController as LecturerDashboard;
 use App\Controllers\Lecturer\IntakeController as LecturerIntake;
 
@@ -28,6 +31,12 @@ $router->get('/learner/fees', [LearnerDashboard::class, 'fees']);
 $router->get('/learner/profile', [Account::class, 'show']);
 $router->post('/learner/profile', [Account::class, 'updateProfile']);
 $router->post('/learner/profile/password', [Account::class, 'updatePassword']);
+$router->get('/learner/announcements', [LearnerPortal::class, 'announcements']);
+$router->get('/learner/calendar', [LearnerPortal::class, 'calendar']);
+$router->get('/learner/results', [LearnerPortal::class, 'results']);
+$router->get('/learner/admission', [LearnerPortal::class, 'admission']);
+$router->get('/learner/admission/{application}/letter', [LearnerPortal::class, 'admissionLetter']);
+$router->get('/learner/admission/{application}/files/{key}', [LearnerPortal::class, 'admissionFile']);
 
 $router->get('/learner/courses/{intake}', [CourseRoomController::class, 'show']);
 $router->get('/learner/materials/{material}/download', [CourseRoomController::class, 'downloadMaterial']);
@@ -50,6 +59,8 @@ $router->post('/lecturer/classes/{intake}/quizzes', [LecturerIntake::class, 'cre
 $router->post('/lecturer/classes/{intake}/attendance', [LecturerIntake::class, 'markAttendance']);
 $router->post('/lecturer/classes/{intake}/grades', [LecturerIntake::class, 'recordGrade']);
 $router->post('/lecturer/classes/{intake}/discussion', [LecturerIntake::class, 'postDiscussion']);
+$router->post('/lecturer/classes/{intake}/announcements', [LecturerIntake::class, 'postAnnouncement']);
+$router->post('/lecturer/announcements/{announcement}/delete', [LecturerIntake::class, 'deleteAnnouncement']);
 $router->get('/lecturer/assignments/{assignment}/submissions', [LecturerIntake::class, 'assignmentSubmissions']);
 $router->get('/lecturer/submissions/{submission}/file', [LecturerIntake::class, 'submissionFile']);
 $router->post('/lecturer/submissions/{submission}/grade', [LecturerIntake::class, 'gradeSubmission']);
@@ -119,7 +130,15 @@ $router->get('/admin/academic/applications/{application}/documents', [AdminAcade
 $router->get('/admin/academic/applications/{application}/files/{key}', [AdminAcademic::class, 'applicationFile']);
 $router->post('/admin/academic/applications/{application}/decide', [AdminAcademic::class, 'decide']);
 $router->post('/admin/academic/fees', [AdminAcademic::class, 'addFee']);
-$router->post('/admin/academic/timetable', [AdminAcademic::class, 'addTimetableEntry']);
+
+$router->get('/admin/announcements', [AdminAnnouncement::class, 'index']);
+$router->post('/admin/announcements', [AdminAnnouncement::class, 'store']);
+$router->post('/admin/announcements/{announcement}/delete', [AdminAnnouncement::class, 'destroy']);
+$router->get('/admin/calendar', [AdminCalendar::class, 'index']);
+$router->post('/admin/calendar/events', [AdminCalendar::class, 'storeEvent']);
+$router->post('/admin/calendar/events/{event}/delete', [AdminCalendar::class, 'destroyEvent']);
+$router->post('/admin/calendar/slots', [AdminCalendar::class, 'storeSlot']);
+$router->post('/admin/calendar/slots/{slot}/delete', [AdminCalendar::class, 'destroySlot']);
 
 $router->get('/admin/users', [AdminUser::class, 'index']);
 $router->post('/admin/users', [AdminUser::class, 'create']);
