@@ -66,7 +66,7 @@ class Course extends Model
     public static function openIntakes(int $courseId): array
     {
         return static::query(
-            'SELECT * FROM intakes WHERE course_id = ? AND status IN ("scheduled","open") ORDER BY start_date',
+            'SELECT * FROM intakes WHERE course_id = ? AND status IN ("scheduled","open") AND organization_id IS NULL ORDER BY start_date',
             [$courseId]
         );
     }

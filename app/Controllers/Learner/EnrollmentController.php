@@ -23,7 +23,8 @@ class EnrollmentController extends Controller
             $this->abort(404, 'Intake not found.');
             return;
         }
-        if (!in_array($intake['status'], ['scheduled', 'open'], true)) {
+        // A corporate cohort belongs to one organisation; its staff are enrolled by CPI, not by self-enrolment.
+        if (!in_array($intake['status'], ['scheduled', 'open'], true) || !empty($intake['organization_id'])) {
             $this->flash('error', 'This intake is no longer open for enrolment.');
             $this->redirect('/courses');
             return;
