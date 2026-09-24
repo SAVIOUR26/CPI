@@ -129,6 +129,7 @@ $router->get('/admin/academic/applications/{application}', [AdminAcademic::class
 $router->get('/admin/academic/applications/{application}/documents', [AdminAcademic::class, 'applicationDocuments']);
 $router->get('/admin/academic/applications/{application}/files/{key}', [AdminAcademic::class, 'applicationFile']);
 $router->post('/admin/academic/applications/{application}/decide', [AdminAcademic::class, 'decide']);
+$router->post('/admin/academic/applications/{application}/bill', [AdminAcademic::class, 'bill']);
 $router->post('/admin/academic/fees', [AdminAcademic::class, 'addFee']);
 
 $router->get('/admin/announcements', [AdminAnnouncement::class, 'index']);

@@ -19,8 +19,9 @@ choice for easy, low-friction deployment on shared cPanel hosting.
 - Zero Composer dependencies — a hand-rolled `App\` autoloader
   (`app/bootstrap.php`), vendored FPDF (certificates) and a vendored
   pure-PHP QR code generator under `vendor/`
-- Flutterwave (Standard v3, Mobile Money + cards) for online payments, plus
-  manual bank-transfer with proof upload
+- Payments by Mobile Money to CPI's numbers: the student uploads a
+  screenshot in the Student Portal and Finance approves it (no payment
+  gateway; see `App\Support\Institute` for the numbers)
 - Hand-rolled SMTP client (falls back to PHP `mail()` if unconfigured) and
   Africa's Talking SMS (optional)
 - No JS framework/build step — plain CSS + vanilla JS

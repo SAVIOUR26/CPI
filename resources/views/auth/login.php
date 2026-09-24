@@ -18,7 +18,7 @@ $asides = [
   ]],
   'staff' => ['CPI staff sign-in', 'Run admissions, payments, programmes and certificates.', [
     ['fa-file-signature', 'Admissions', 'Review applications and admit students.'],
-    ['fa-money-bill-wave', 'Payments', 'Confirm bank transfers and track fees.'],
+    ['fa-money-bill-wave', 'Payments', 'Approve Mobile Money payments and track fees.'],
     ['fa-award', 'Certificates', 'Issue verifiable, QR-coded certificates.'],
   ]],
 ];

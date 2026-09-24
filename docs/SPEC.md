@@ -64,9 +64,10 @@ Key permissions: `courses.manage`, `intakes.manage`, `enrolments.manage`,
 ## 4. Core flows
 
 **Self-enrolment (short course):** browse catalogue → course page shows next
-intake → Enroll → login/register → payment (Mobile Money/card via
-Flutterwave, or bank transfer with proof upload) → on confirmed payment,
-enrolment activates → learner portal access to that course.
+intake → Enroll → login/register → payment (Mobile Money to CPI's numbers,
+then a screenshot uploaded in the Student Portal) → Finance approves it →
+once the fee is fully paid, enrolment activates → learner portal access to
+that course.
 
 **Corporate request:** organization fills request form (org, contact,
 topic/course, headcount, location, mode, dates, budget) → admin reviews,
@@ -93,9 +94,16 @@ verifiable at `/verify/{code}`.
 
 ## 5. Payments
 
-- Mobile Money (MTN/Airtel) + Cards: **Flutterwave** (`FLW_PUBLIC_KEY`,
-  `FLW_SECRET_KEY`, webhook signature verification).
-- Bank transfer: manual, with proof-of-payment upload, confirmed by Finance.
+- Mobile Money (Airtel / MTN), manual: students send the fee to CPI's
+  numbers (registered to the Principal Accountant), upload a screenshot of
+  the confirmation with the amount, number and transaction ID, and Finance
+  approves or declines it in Admin → Payments. Approving can record less
+  than the student entered; declining emails the reason. On the client's
+  instruction (Sep 2026) there is no online gateway: the earlier
+  Flutterwave integration was removed and can be restored from git history
+  if they want card payments later.
+- Academic programmes: fees are agreed at admission; Admissions enters the
+  fee when admitting (or bills it later) and the student pays it the same way.
 - Corporate: invoice-based, part-payment allowed, tracked in `invoices` +
   `invoice_payments`.
 - Academic: `fee_ledger` per student per academic term, with instalment

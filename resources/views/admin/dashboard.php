@@ -31,8 +31,9 @@
           <tr>
             <td><?= e($p['full_name'] ?? '—') ?></td>
             <td><strong><?= money($p['amount'], $p['currency']) ?></strong></td>
-            <td><?= e(ucwords(str_replace('_', ' ', $p['method']))) ?></td>
-            <td><span class="status status-<?= e($p['status']) ?>"><?= e(str_replace('_', ' ', $p['status'])) ?></span></td>
+            <td><?= e(\App\Models\Payment::methodLabel($p['method'])) ?></td>
+            <?php [$statusLabel, $statusClass] = \App\Models\Payment::statusLabel($p['status']); ?>
+            <td><span class="status status-<?= e($statusClass) ?>"><?= e($statusLabel) ?></span></td>
           </tr>
         <?php endforeach; ?>
         <?php if (!$recentPayments): ?><tr><td colspan="4"><div class="empty-state"><i class="fa-solid fa-receipt"></i>No payments yet.</div></td></tr><?php endif; ?>

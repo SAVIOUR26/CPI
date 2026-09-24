@@ -1449,6 +1449,55 @@ label.check-lg input { margin-top: 3px; }
 .letter-table tr:hover { background: transparent; }
 .letter-sign { margin-top: 32px; }
 
+/* ---------- Payments: Mobile Money instructions, pay steps, approval queue ---------- */
+.momo { padding: 18px; border: 1px solid var(--gold-300); border-radius: 16px; background: linear-gradient(180deg, #fffaf0, #fff); }
+.momo-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.momo-icon { display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; border-radius: 14px; background: var(--gold-100); color: var(--gold-600); font-size: 1.25rem; }
+.momo h3 { margin: 0 0 2px; font-family: var(--font-sans); font-size: 1rem; font-weight: 800; }
+.momo-head p { margin: 0; font-size: .9rem; color: var(--text); }
+.momo-numbers { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 10px; }
+.momo-numbers li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 10px 10px 16px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+.momo-numbers small { display: block; font-size: .68rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.momo-numbers strong { display: block; font-size: 1.3rem; font-weight: 800; letter-spacing: .02em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.momo-numbers .btn { flex-shrink: 0; }
+.momo-name { display: flex; gap: 10px; margin: 0; font-size: .86rem; line-height: 1.55; color: var(--ink-2); }
+.momo-name > i { margin-top: 3px; color: var(--success); }
+.momo-ref { margin: 10px 0 0; font-size: .82rem; color: var(--muted); }
+.pay-steps { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; margin-bottom: 24px; }
+.pay-steps > .panel { margin-bottom: 0; }
+.step-no { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--brand-700); color: #fff; font-size: .85rem; font-weight: 800; }
+.upload-box-lg { padding: 28px 18px; }
+.upload-box-lg > i { font-size: 2rem; }
+.upload-preview { max-width: 100%; max-height: 220px; margin-top: 8px; border-radius: 10px; border: 1px solid var(--line); box-shadow: var(--shadow-sm); object-fit: contain; background: #fff; }
+.howto-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 28px; align-items: center; }
+.pay-howto { margin: 0; padding: 0; list-style: none; counter-reset: howto; display: grid; gap: 14px; }
+.pay-howto li { position: relative; padding-left: 44px; font-size: .9rem; line-height: 1.55; color: var(--ink-2); counter-increment: howto; }
+.pay-howto li::before {
+  content: counter(howto); position: absolute; left: 0; top: -2px; display: grid; place-items: center; width: 30px; height: 30px;
+  border-radius: 50%; background: var(--brand-50); border: 1px solid var(--brand-100); color: var(--brand-700); font-size: .82rem; font-weight: 800;
+}
+.pay-howto strong { color: var(--ink); }
+.dash-main > .notice { margin-bottom: 24px; }
+.review-reason { color: var(--danger); font-weight: 600; }
+
+.count-pill { display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--brand-700); color: #fff; font-family: var(--font-sans); font-size: .78rem; font-weight: 800; }
+.review-queue { display: grid; gap: 16px; margin-bottom: 28px; }
+.review-card { display: grid; grid-template-columns: 150px minmax(0, 1fr) 280px; gap: 20px; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: #fff; box-shadow: var(--shadow-xs); }
+.review-shot { display: grid; place-items: center; height: 210px; overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-soft); color: var(--muted); font-size: .8rem; font-weight: 700; text-align: center; }
+.review-shot img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.review-shot i { display: block; margin-bottom: 6px; font-size: 2rem; color: var(--brand-600); }
+.review-card h3 { margin: 0 0 2px; font-family: var(--font-sans); font-size: 1rem; font-weight: 800; }
+.review-card .review-amount { margin: 6px 0 10px; font-size: 1.5rem; font-weight: 800; color: var(--ink); font-variant-numeric: tabular-nums; }
+.review-facts { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; font-size: .84rem; }
+.review-facts dt { color: var(--muted); }
+.review-facts dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.review-actions { display: grid; gap: 12px; align-content: start; }
+.review-actions form { display: grid; gap: 8px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-soft); }
+.review-actions label { margin: 0; font-size: .78rem; }
+.review-actions input[type=number], .review-actions input[type=text] { padding: 9px 12px; font-size: .9rem; }
+.bill-form { display: grid; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+.bill-form .form-group { margin-bottom: 0; }
+
 /* ---------- Scroll reveal ---------- */
 .js [data-reveal] {
   opacity: 0; transform: translateY(26px);
@@ -1577,6 +1626,9 @@ label.check-lg input { margin-top: 3px; }
   .apply-layout, .review-grid, .academic-feature, .account-grid, .calendar-grid { grid-template-columns: minmax(0, 1fr); }
   .grade-form { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grade-form .btn { justify-self: start; }
+  .pay-steps, .howto-grid { grid-template-columns: minmax(0, 1fr); }
+  .review-card { grid-template-columns: 130px minmax(0, 1fr); }
+  .review-actions { grid-column: 1 / -1; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .contact-cards, .modes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .add-user-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .apply-aside, .review-aside { position: static; }
@@ -1627,6 +1679,24 @@ label.check-lg input { margin-top: 3px; }
   .letter-head strong { font-size: 1.15rem; }
   .letter-table th { width: 42%; }
   .letter-table th, .letter-table td { padding: 8px 10px; }
+  .momo { padding: 14px; }
+  .momo-numbers strong { font-size: 1.15rem; }
+  .review-card { grid-template-columns: minmax(0, 1fr); padding: 14px; }
+  /* Tables that hold a pay button become stacked cards, so the action is never off-screen */
+  .table-stack { overflow: visible; }
+  .table-stack thead { display: none; }
+  .table-stack table, .table-stack tbody, .table-stack tr, .table-stack td { display: block; width: 100%; }
+  .table-stack tr { padding: 14px 18px; border-bottom: 1px solid var(--line); }
+  .table-stack tbody tr:last-child { border-bottom: 0; }
+  .table-stack td { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 4px 0; border: 0; text-align: right; white-space: normal; }
+  .table-stack td::before { content: attr(data-label); flex-shrink: 0; font-size: .7rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-align: left; }
+  .table-stack td:first-child, .table-stack td.cell-actions, .table-stack td[colspan] { display: block; text-align: left; }
+  .table-stack td:first-child { padding-bottom: 8px; }
+  .table-stack td:first-child::before, .table-stack td.cell-actions::before, .table-stack td[colspan]::before { display: none; }
+  .table-stack td.cell-actions { padding-top: 10px; }
+  .table-stack td.cell-actions .btn { width: 100%; justify-content: center; }
+  .review-shot { height: 220px; }
+  .review-actions { grid-template-columns: minmax(0, 1fr); }
 }
 
 /* ---------- Reduced motion ---------- */

@@ -245,13 +245,15 @@ CREATE TABLE IF NOT EXISTS payments (
   id             BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   invoice_id     BIGINT UNSIGNED NULL,
   user_id        BIGINT UNSIGNED NULL,
-  method         ENUM('flutterwave','bank_transfer','cash','other') NOT NULL,
-  provider_ref   VARCHAR(190) NULL,           -- Flutterwave tx_ref / transaction id
+  method         ENUM('flutterwave','bank_transfer','mobile_money','cash','other') NOT NULL,  -- mobile_money in use; others kept for old rows
+  provider_ref   VARCHAR(190) NULL,           -- Mobile Money transaction ID from the confirmation message
+  payer_phone    VARCHAR(40) NULL,            -- number the student paid from
   amount         DECIMAL(12,2) NOT NULL,
   currency       VARCHAR(3) NOT NULL DEFAULT 'UGX',
   status         ENUM('initiated','successful','failed','pending_review') NOT NULL DEFAULT 'initiated',
-  proof_path     VARCHAR(255) NULL,           -- bank transfer proof upload
-  confirmed_by   BIGINT UNSIGNED NULL,
+  proof_path     VARCHAR(255) NULL,           -- screenshot of the Mobile Money confirmation
+  confirmed_by   BIGINT UNSIGNED NULL,        -- admin who approved or declined it
+  review_note    VARCHAR(255) NULL,           -- reason given when a payment is not approved
   raw_payload    MEDIUMTEXT NULL,             -- webhook/gateway response, for audit
   created_at     DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   confirmed_at   DATETIME NULL,

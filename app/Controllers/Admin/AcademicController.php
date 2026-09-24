@@ -14,8 +14,10 @@ use App\Models\CourseCategory;
 use App\Models\Enrollment;
 use App\Models\FeeLedger;
 use App\Models\Intake;
+use App\Models\Invoice;
 use App\Models\User;
 use App\Support\ApplicationDocuments;
+use App\Support\Institute;
 use App\Support\NewAccounts;
 use App\Support\Str;
 
@@ -202,6 +204,8 @@ class AcademicController extends Controller
         $programme = AcademicProgramme::withCourse((int) $app['programme_id']);
         $intakes = Intake::query('SELECT * FROM intakes WHERE course_id = ? ORDER BY start_date DESC', [$programme['course_id']]);
         $form = json_decode((string) $app['form_data'], true) ?: [];
+        $enrollment = $app['status'] === 'admitted' && $app['user_id'] && $app['intake_id']
+            ? Enrollment::existing((int) $app['user_id'], (int) $app['intake_id']) : null;
 
         $this->view('admin.academic.application-show', [
             'pageTitle' => ($app['application_no'] ?: 'Application') . ' — ' . $app['applicant_name'],
@@ -212,6 +216,7 @@ class AcademicController extends Controller
             'form' => $form,
             'documents' => ApplicationDocuments::list($app, '/admin/academic/applications/' . (int) $app['id'] . '/files/'),
             'reviewer' => $app['reviewed_by'] ? User::find((int) $app['reviewed_by']) : null,
+            'invoice' => $enrollment ? Invoice::forEnrollment((int) $enrollment['id']) : null,
         ], 'layouts.dashboard');
     }
 
@@ -296,6 +301,11 @@ class AcademicController extends Controller
                     $this->redirect($back);
                 }
             }
+            $fee = self::feeAmount($request->input('fee'));
+            if ($fee > 0 && !$intakeId) {
+                $this->flash('error', 'Choose the intake the fee is for, or leave the fee blank and bill it later.');
+                $this->redirect($back);
+            }
 
             $existingUser = User::findByEmail($app['email']);
             $tempPassword = null;
@@ -315,14 +325,7 @@ class AcademicController extends Controller
             $update['user_id'] = $userId;
             $update['intake_id'] = $intakeId;
 
-            if ($intakeId && !Enrollment::existing($userId, $intakeId)) {
-                Enrollment::insert([
-                    'user_id' => $userId,
-                    'intake_id' => $intakeId,
-                    'source' => 'academic_admission',
-                    'status' => 'pending_payment',
-                ]);
-            }
+            $invoice = $intakeId ? $this->enrolAndBill($userId, $intakeId, $fee, (string) ($programme['price_currency'] ?? 'UGX')) : null;
 
             $login = $tempPassword
                 ? '<p>We have created your Student Portal account:<br>Email: <strong>' . e($app['email']) . '</strong><br>Temporary password: <strong>'
@@ -335,13 +338,15 @@ class AcademicController extends Controller
                 $greeting . '<p>Congratulations! Following review of your application' . e($ref) . ', you have been offered admission to the <strong>'
                 . e($programme['title']) . '</strong>' . ($programme['awarding_body'] ? ', awarded by ' . e($programme['awarding_body']) : '') . '.</p>'
                 . $login . '<p>Log in at <a href="' . e(url('/login')) . '">' . e(url('/login')) . '</a> to complete your registration and fee payment.</p>'
+                . ($invoice ? self::feeEmailPart($invoice) : '')
                 . '<p>Please keep your original academic documents — you may be asked to present them for verification.</p>' . $signoff
             );
             if ($tempPassword) {
                 NewAccounts::add($app['applicant_name'], $app['email'], $tempPassword, 'student', $emailed);
             }
             $message = 'Applicant admitted' . ($emailed ? ' and the offer emailed' : ' — the offer email could not be sent, so let them know directly')
-                . ($intakeId ? ', with an enrolment awaiting payment.' : '. Assign an intake when one is available.');
+                . ($invoice ? ', enrolled and billed ' . money($invoice['amount_total'], $invoice['currency']) . ' (' . $invoice['invoice_number'] . ').'
+                    : ($intakeId ? ', with an enrolment awaiting payment. Bill the agreed fee below.' : '. Choose an intake and bill the fee below when ready.'));
         } else {
             Mailer::send(
                 $app['email'],
@@ -358,6 +363,88 @@ class AcademicController extends Controller
         AuditLog::record('academic_application.decide', 'academic_application', $appId, ['decision' => $decision]);
         $this->flash('success', $message);
         $this->redirect($back);
+    }
+
+    /** Bills an admitted student's agreed fee, enrolling them in an intake first if that wasn't done at admission. */
+    public function bill(Request $request): void
+    {
+        $this->requirePermission('admissions.manage');
+        $this->verifyCsrf($request);
+        $app = $this->findApplication((int) $request->param('application'));
+        $back = '/admin/academic/applications/' . (int) $app['id'];
+        if ($app['status'] !== 'admitted' || !$app['user_id']) {
+            $this->flash('error', 'Only admitted students can be billed.');
+            $this->redirect($back);
+        }
+
+        $programme = AcademicProgramme::withCourse((int) $app['programme_id']);
+        $intakeId = (int) ($app['intake_id'] ?: $request->input('intake_id', 0));
+        $intake = $intakeId ? Intake::find($intakeId) : null;
+        if (!$intake || (int) $intake['course_id'] !== (int) $programme['course_id']) {
+            $this->flash('error', 'Choose an intake of this programme.');
+            $this->redirect($back);
+        }
+        $fee = self::feeAmount($request->input('fee'));
+        if ($fee <= 0) {
+            $this->flash('error', 'Enter the agreed fee.');
+            $this->redirect($back);
+        }
+        $userId = (int) $app['user_id'];
+        $enrollment = Enrollment::existing($userId, $intakeId);
+        if ($enrollment && Invoice::forEnrollment((int) $enrollment['id'])) {
+            $this->flash('error', 'This student already has a fee for that intake.');
+            $this->redirect($back);
+        }
+
+        $invoice = $this->enrolAndBill($userId, $intakeId, $fee, (string) ($programme['price_currency'] ?? 'UGX'));
+        if (!$app['intake_id']) {
+            AcademicApplication::update((int) $app['id'], ['intake_id' => $intakeId]);
+        }
+        AuditLog::record('academic_application.bill', 'academic_application', (int) $app['id'], ['invoice' => $invoice['invoice_number'], 'fee' => $fee]);
+
+        $emailed = Mailer::send(
+            $app['email'],
+            $app['applicant_name'],
+            'Your fees — ' . $programme['title'],
+            '<p>Dear ' . e($app['applicant_name']) . ',</p>'
+            . '<p>Your fee for the <strong>' . e($programme['title']) . '</strong> (' . e($intake['code']) . ') is ready to pay.</p>'
+            . self::feeEmailPart($invoice) . '<p>Crawford Professionals Institute — Admissions</p>'
+        );
+        $this->flash('success', 'Billed ' . money($invoice['amount_total'], $invoice['currency']) . ' (' . $invoice['invoice_number'] . '). '
+            . $app['applicant_name'] . ' can pay it under Fees & Payments' . ($emailed ? ' and has been emailed.' : ' — the email could not be sent, so let them know.'));
+        $this->redirect($back);
+    }
+
+    /** Enrols the student in the intake with fees pending and, when a fee is given, bills it. Returns the invoice, if any. */
+    private function enrolAndBill(int $userId, int $intakeId, float $fee, string $currency): ?array
+    {
+        $enrollment = Enrollment::existing($userId, $intakeId);
+        $enrollmentId = $enrollment ? (int) $enrollment['id'] : Enrollment::insert([
+            'user_id' => $userId,
+            'intake_id' => $intakeId,
+            'source' => 'academic_admission',
+            'status' => 'pending_payment',
+        ]);
+        if ($fee <= 0) {
+            return null;
+        }
+        return Invoice::forEnrollment($enrollmentId) ?? Invoice::find(Invoice::createForEnrollment($enrollmentId, $userId, $fee, $currency ?: 'UGX'));
+    }
+
+    /** The fee and how to pay it, for admission and billing emails. */
+    private static function feeEmailPart(array $invoice): string
+    {
+        return '<p>Your fee: <strong>' . e(money($invoice['amount_total'], $invoice['currency'])) . '</strong> (invoice ' . e($invoice['invoice_number']) . ').</p>'
+            . '<p>Pay by Mobile Money to ' . e(Institute::mobileMoneySummary()) . '. Then upload a screenshot of the confirmation under '
+            . '<strong>Fees &amp; Payments</strong> in the Student Portal (<a href="' . e(url('/learner/fees')) . '">' . e(url('/learner/fees')) . '</a>). '
+            . 'The Finance office approves it and your class opens once the fee is fully paid.</p>';
+    }
+
+    /** A fee typed as "1,500,000" or "1500000"; 0 when blank or not a number. */
+    private static function feeAmount(mixed $raw): float
+    {
+        $raw = str_replace([',', ' '], '', (string) $raw);
+        return is_numeric($raw) && (float) $raw > 0 ? round((float) $raw, 2) : 0.0;
     }
 
     public function addFee(Request $request): void

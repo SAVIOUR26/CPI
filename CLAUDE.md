@@ -10,8 +10,8 @@ the server.
 A zero-Composer PHP MVC app (see README.md for the stack and layout). It
 was built and smoke-tested locally against MariaDB with PHP's built-in
 dev server (`php -S`). It has **not** yet been deployed to real cPanel
-hosting or tested against Flutterwave/SMTP/SMS in live mode — that's the
-remaining work for this handover.
+hosting or tested against SMTP/SMS in live mode — that's the remaining
+work for this handover.
 
 ## Deployment steps (cPanel, shared hosting)
 
@@ -68,16 +68,19 @@ remaining work for this handover.
      spam — CPI's admissions/payment/certificate emails matter)
    - `AT_*` — Africa's Talking SMS creds, if/when SMS is wanted; safe to
      leave blank (SMS sending just no-ops/logs)
-   - `FLW_*` — **live** Flutterwave keys (not test keys) from the
-     Flutterwave dashboard. `FLW_SECRET_HASH` must match the webhook
-     secret hash configured in Flutterwave's dashboard for the webhook
-     URL in the next step.
+   - There are no payment-gateway keys: any `FLW_*` lines left in an old
+     `.env` are unused and can be deleted.
 
-6. **Register the Flutterwave webhook URL**: in the Flutterwave
-   dashboard, set the webhook to
-   `https://crawfordinstitute.online/webhooks/flutterwave` (see
-   `routes/web.php` for the current route if this changes) with the same
-   secret hash as `FLW_SECRET_HASH` in `.env`.
+6. **Payments are manual Mobile Money** (the client's instruction, Sep
+   2026). Students send the fee to the numbers in
+   `App\Support\Institute::MOBILE_MONEY` (registered to CPI's Principal
+   Accountant), upload a screenshot under **Fees & Payments**, and Finance
+   approves it in **Admin → Payments**; the class opens once the fee is
+   fully paid. Give whoever approves payments the Finance role in Users &
+   Roles, and make sure `support_email` (settings table) reaches them —
+   it gets an email for every upload. There is no online gateway: the
+   Flutterwave integration was removed and can be restored from git
+   history if card payments are wanted later.
 
 7. **File permissions.** `storage/` (and its subfolders:
    `uploads/`, `uploads/certificates/`, `uploads/payment-proofs/`,
@@ -97,12 +100,10 @@ remaining work for this handover.
    8.1 in some spots will break.
 
 10. **Smoke test on the live domain** before calling it done — at minimum:
-    register → enrol in a free/test-priced course → pay via bank transfer
-    → admin confirms payment → learner reaches the course room; and
-    separately, a real Flutterwave test transaction if Flutterwave
-    provides a sandbox/live-test mode, to confirm the webhook fires and
-    `payments.status` updates. See the full checklist this repo was
-    smoke-tested against, below.
+    register → enrol in a test-priced course → send a small real Mobile
+    Money payment → upload the screenshot → approve it in Admin →
+    Payments → the learner reaches the course room. See the full checklist
+    this repo was smoke-tested against, below.
 
 ## What has already been tested (locally, against MariaDB + `php -S`)
 
@@ -110,9 +111,9 @@ All of the following were exercised end-to-end with real HTTP requests
 against a local dev server and verified against the database — not just
 read through:
 
-- Register → self-enrol in a short course → pay by manual bank transfer
-  (proof upload) → admin confirms payment → learner reaches the course
-  room.
+- Register → self-enrol in a short course → pay by Mobile Money
+  (screenshot upload) → admin approves the payment → learner reaches the
+  course room.
 - Lecturer: create a quiz, add a question with options (including
   `&`-containing text, to catch encoding bugs), grade an assignment
   submission.
@@ -165,6 +166,16 @@ read through:
   admission letter (one A4 page); another applicant's letter or documents
   are 404. Applying while signed in links the application to the account
   only when the form's email is the account's own.
+- Mobile Money payments, in a browser: a student enrols, sees CPI's
+  numbers and the registered name on the payment page, and uploads a
+  screenshot with the amount, number and transaction ID (wrong file types,
+  fake images and amounts above the balance are refused). Finance approves
+  part of the fee (the amount can be corrected), the student sees the
+  balance, pays the rest and is approved again — the class opens only
+  then. A declined payment shows its reason to the student. Admitting an
+  academic applicant with an agreed fee bills it (or Admissions bills it
+  afterwards) and the student pays it the same way. Students can't open
+  each other's invoices or the admin screenshots.
 - Real content import: `schema.sql` → `seed.sql` → `seed_courses.sql`
   imported into a **freshly created** database with zero errors; the
   public `/courses` catalogue lists all 184 real courses, `/corporate-
@@ -172,12 +183,10 @@ read through:
   renders the correct real price/award, and `/about` and the homepage
   render the client's real About/Why-Choose/welcome copy.
 
-**Not yet tested locally** (do before/while doing final touches):
-Flutterwave online payment end-to-end (card/Mobile Money) including the
-signed webhook — this needs live or sandbox Flutterwave keys, which
-weren't available in the dev sandbox; and real SMTP/SMS delivery (the dev
-environment had no `sendmail` binary, so mail silently no-ops rather than
-sending — confirm this is not still the case once deployed).
+**Not yet tested locally** (do before/while doing final touches): real
+SMTP/SMS delivery (the dev environment had no `sendmail` binary, so mail
+silently no-ops rather than sending — confirm this is not still the case
+once deployed). Payment emails (upload, approved, declined) depend on it.
 
 ## Known quirks worth knowing before changing code
 
@@ -235,8 +244,8 @@ sending — confirm this is not still the case once deployed).
   stored in it.
 
 - **Contact details live in one place.** Location, training coverage,
-  phone numbers, WhatsApp, email and the four training modes are constants
-  in `App\Support\Institute`; the top bar, phone menu, footer, Contact and
+  phone numbers, WhatsApp, email, the four training modes and the Mobile
+  Money payment numbers are constants in `App\Support\Institute`; the top bar, phone menu, footer, Contact and
   About pages, the WhatsApp button, the corporate request form's mode list
   and the homepage's search-engine data (JSON-LD) all read from it.
 

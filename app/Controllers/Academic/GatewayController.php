@@ -71,7 +71,7 @@ class GatewayController extends Controller
             'programme' => $programme,
             'level' => AcademicProgramme::levels()[$programme['award_level']],
             'maxFileBytes' => $this->maxFileBytes(),
-            'maxTotalBytes' => self::iniBytes((string) ini_get('post_max_size')),
+            'maxTotalBytes' => Upload::iniBytes((string) ini_get('post_max_size')),
             'maxFileCount' => (int) ini_get('max_file_uploads'),
         ]);
     }
@@ -79,20 +79,8 @@ class GatewayController extends Controller
     /** The smaller of our own per-file cap and the server's upload_max_filesize. */
     private function maxFileBytes(): int
     {
-        $server = self::iniBytes((string) ini_get('upload_max_filesize'));
+        $server = Upload::iniBytes((string) ini_get('upload_max_filesize'));
         return $server > 0 ? min(self::MAX_FILE_BYTES, $server) : self::MAX_FILE_BYTES;
-    }
-
-    private static function iniBytes(string $value): int
-    {
-        $value = trim($value);
-        $n = (int) $value;
-        return match (strtolower(substr($value, -1))) {
-            'g' => $n * 1024 ** 3,
-            'm' => $n * 1024 ** 2,
-            'k' => $n * 1024,
-            default => $n,
-        };
     }
 
     public function submitApply(Request $request): void
@@ -103,7 +91,7 @@ class GatewayController extends Controller
         // Over post_max_size, PHP drops the whole body (CSRF token included) — explain rather than show a session error.
         if (empty($_POST) && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
             $this->flash('error', 'Your attachments were too large to send together (the server accepts up to '
-                . round(self::iniBytes((string) ini_get('post_max_size')) / 1048576) . 'MB in total). Please attach smaller scans and try again.');
+                . round(Upload::iniBytes((string) ini_get('post_max_size')) / 1048576) . 'MB in total). Please attach smaller scans and try again.');
             $this->redirect($back);
         }
         $this->verifyCsrf($request);

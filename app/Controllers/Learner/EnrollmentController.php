@@ -54,25 +54,11 @@ class EnrollmentController extends Controller
             ]);
         }
 
-        // Reuse an unpaid invoice for this enrolment if one already exists.
-        $invoices = Invoice::query(
-            "SELECT * FROM invoices WHERE billable_type = 'enrollment' AND billable_id = ? AND status != 'void' LIMIT 1",
-            [$enrollmentId]
-        );
-
-        if ($invoices) {
-            $invoiceId = $invoices[0]['id'];
-        } else {
-            $invoiceId = Invoice::insert([
-                'invoice_number' => Invoice::generateNumber(),
-                'billable_type' => 'enrollment',
-                'billable_id' => $enrollmentId,
-                'user_id' => $userId,
-                'amount_total' => $intake['price_amount'] ?? 0,
-                'currency' => $intake['price_currency'] ?? 'UGX',
-                'status' => 'unpaid',
-            ]);
-        }
+        // Reuse the open invoice for this enrolment if one already exists.
+        $invoice = Invoice::forEnrollment($enrollmentId);
+        $invoiceId = $invoice
+            ? (int) $invoice['id']
+            : Invoice::createForEnrollment($enrollmentId, $userId, (float) ($intake['price_amount'] ?? 0), (string) ($intake['price_currency'] ?? 'UGX'));
 
         $this->redirect('/learner/pay/' . $invoiceId);
     }

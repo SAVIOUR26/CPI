@@ -389,6 +389,31 @@
     });
   });
 
+  /* ---------- Single upload boxes (payment screenshots): file name, size check and preview ---------- */
+  document.querySelectorAll('form[data-upload-single] .upload-box input[type=file]').forEach(function (input) {
+    var box = input.closest('.upload-box');
+    var label = box.querySelector('[data-file-label]');
+    var initial = label ? label.textContent : '';
+    var max = parseInt(input.getAttribute('data-max-bytes'), 10) || 0;
+    var preview = null;
+    input.addEventListener('change', function () {
+      var file = input.files && input.files[0];
+      var msg = file && max && file.size > max ? file.name + ' is ' + formatMB(file.size) + '. The maximum is ' + formatMB(max) + '.' : '';
+      input.setCustomValidity(msg);
+      if (label) label.textContent = msg || (file ? file.name + ' · ' + formatMB(file.size) : initial);
+      box.classList.toggle('has-file', !!file && !msg);
+      box.classList.toggle('has-error', !!msg);
+      if (preview) { URL.revokeObjectURL(preview.src); preview.remove(); preview = null; }
+      if (file && !msg && /^image\//.test(file.type) && window.URL) {
+        preview = document.createElement('img');
+        preview.className = 'upload-preview';
+        preview.alt = '';
+        preview.src = URL.createObjectURL(file);
+        box.appendChild(preview);
+      }
+    });
+  });
+
   /* ---------- Confirm deletions ---------- */
   document.querySelectorAll('form[data-confirm-submit]').forEach(function (form) {
     form.addEventListener('submit', function (e) {

@@ -3,9 +3,10 @@
 namespace App\Support;
 
 /**
- * CPI's public contact details, coverage and training modes, as supplied by
- * the client. The top bar, phone menu, footer, Contact and About pages, the
- * WhatsApp button and the search-engine details all read from here.
+ * CPI's public contact details, coverage, training modes and Mobile Money
+ * payment details, as supplied by the client. The top bar, phone menu,
+ * footer, Contact and About pages, the WhatsApp button, the search-engine
+ * details and the payment pages all read from here.
  */
 final class Institute
 {
@@ -16,6 +17,18 @@ final class Institute
     public const PHONES = ['+256 393 194884', '+256 740 245057'];
     public const WHATSAPP = '+256 740 245057';
     public const WHATSAPP_GREETING = 'Hello CPI, I would like to know more about your training programmes.';
+
+    /**
+     * How students pay (the client's instruction, Sep 2026): Mobile Money to one of these numbers, registered to
+     * CPI's Principal Accountant; the student uploads the screenshot in the Student Portal and Finance approves it.
+     * [network, number]
+     */
+    public const MOBILE_MONEY = [
+        ['Airtel Money', '0740 245057'],
+        ['MTN Mobile Money', '0773 539831'],
+    ];
+    public const MOBILE_MONEY_NAME = 'JAMES OPIO';
+    public const MOBILE_MONEY_ROLE = 'Principal Accountant';
 
     /** [icon, name, short description] */
     public const TRAINING_MODES = [
@@ -37,6 +50,13 @@ final class Institute
     public static function modeLabel(?string $mode, bool $short = false): string
     {
         return self::MODES[$mode][$short ? 1 : 0] ?? ucfirst(str_replace('_', ' ', (string) $mode));
+    }
+
+    /** "0740 245057 (Airtel Money) or 0773 539831 (MTN Mobile Money), registered to JAMES OPIO, CPI's Principal Accountant" */
+    public static function mobileMoneySummary(): string
+    {
+        return implode(' or ', array_map(fn ($m) => $m[1] . ' (' . $m[0] . ')', self::MOBILE_MONEY))
+            . ', registered to ' . self::MOBILE_MONEY_NAME . ', CPI\'s ' . self::MOBILE_MONEY_ROLE;
     }
 
     public static function tel(string $number): string

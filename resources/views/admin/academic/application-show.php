@@ -1,7 +1,7 @@
 <?php
 $sidebar = 'partials.sidebar-admin';
 /** @var array $app */ /** @var array $programme */ /** @var array|null $level */ /** @var array $intakes */
-/** @var array $form */ /** @var array $documents */ /** @var array|null $reviewer */
+/** @var array $form */ /** @var array $documents */ /** @var array|null $reviewer */ /** @var array|null $invoice the admitted student's fee */
 $labels = ['submitted' => 'New', 'under_review' => 'Under review', 'admitted' => 'Admitted', 'rejected' => 'Not admitted'];
 $p = $form['personal'] ?? [];
 $choice = $form['programme'] ?? [];
@@ -187,6 +187,11 @@ $base = '/admin/academic/applications/' . (int) $app['id'];
                 <a href="/admin/courses/<?= (int) $programme['course_id'] ?>">Manage intakes</a></p>
             </div>
             <div class="form-group">
+              <label for="fee">Agreed fee (UGX) <span class="muted">(optional)</span></label>
+              <input id="fee" type="number" name="fee" min="0" step="any" inputmode="numeric" placeholder="e.g. 1500000">
+              <p class="help-text">With an intake, the student is billed this fee and pays it by Mobile Money in the Student Portal. You can also bill it later.</p>
+            </div>
+            <div class="form-group">
               <label for="decision_note">Internal note</label>
               <textarea id="decision_note" name="decision_note" rows="3" placeholder="Visible to admins only — not sent to the applicant"><?= e((string) $app['decision_note']) ?></textarea>
             </div>
@@ -206,6 +211,39 @@ $base = '/admin/academic/applications/' . (int) $app['id'];
           </dl>
           <?php if ($app['decision_note']): ?>
             <p class="help-text" style="margin-top:14px"><strong>Internal note:</strong><br><?= nl2br(e($app['decision_note'])) ?></p>
+          <?php endif; ?>
+          <?php if ($app['status'] === 'admitted'): ?>
+            <?php if ($invoice): ?>
+              <dl class="decision-summary bill-form">
+                <div><dt>Fee</dt><dd><?= money($invoice['amount_total'], $invoice['currency']) ?></dd></div>
+                <div><dt>Paid</dt><dd><?= money($invoice['amount_paid'], $invoice['currency']) ?></dd></div>
+                <div><dt>Invoice</dt><dd><span class="status status-<?= e($invoice['status']) ?>"><?= e(str_replace('_', ' ', $invoice['status'])) ?></span></dd></div>
+              </dl>
+              <p class="help-text"><?= e($invoice['invoice_number']) ?> · payments are approved under <a href="/admin/payments">Payments</a>.</p>
+            <?php elseif ($app['user_id']): ?>
+              <form method="post" action="<?= $base ?>/bill" class="bill-form no-print">
+                <?= csrf_field() ?>
+                <strong>Bill the agreed fee</strong>
+                <?php if (!$app['intake_id']): ?>
+                  <div class="form-group">
+                    <label for="bill_intake">Intake</label>
+                    <select id="bill_intake" name="intake_id" required>
+                      <option value="">Choose an intake…</option>
+                      <?php foreach ($intakes as $i): ?>
+                        <option value="<?= (int) $i['id'] ?>"><?= e($i['code']) ?><?= $i['start_date'] ? ' — starts ' . date_pretty($i['start_date']) : '' ?></option>
+                      <?php endforeach; ?>
+                    </select>
+                    <?php if (!$intakes): ?><p class="help-text">No intakes yet. <a href="/admin/courses/<?= (int) $programme['course_id'] ?>">Add one</a> first.</p><?php endif; ?>
+                  </div>
+                <?php endif; ?>
+                <div class="form-group">
+                  <label for="bill_fee">Agreed fee (UGX)</label>
+                  <input id="bill_fee" type="number" name="fee" min="1" step="any" inputmode="numeric" placeholder="e.g. 1500000" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm btn-block"><i class="fa-solid fa-file-invoice"></i> Bill and email the student</button>
+                <p class="help-text" style="margin:0">They pay by Mobile Money and upload the screenshot in the Student Portal.</p>
+              </form>
+            <?php endif; ?>
           <?php endif; ?>
         <?php endif; ?>
         <?php if ($open && $app['status'] === 'under_review' && $reviewer): ?>

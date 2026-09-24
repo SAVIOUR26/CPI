@@ -61,7 +61,7 @@ $heroChips = array_slice($heroChips, 0, 4);
       </div>
       <ul class="hero-trust">
         <li><i class="fa-solid fa-shield-halved"></i> Certificates verifiable online</li>
-        <li><i class="fa-solid fa-mobile-screen-button"></i> Pay by Mobile Money or card</li>
+        <li><i class="fa-solid fa-mobile-screen-button"></i> Pay by Mobile Money</li>
         <li><i class="fa-solid fa-house-laptop"></i> Online, on-site &amp; in-house</li>
       </ul>
     </div>
@@ -89,7 +89,7 @@ $heroChips = array_slice($heroChips, 0, 4);
       </div>
       <div class="hero-float hf-2">
         <span class="hf-icon gold"><i class="fa-solid fa-mobile-screen-button"></i></span>
-        <div><strong>MTN &amp; Airtel Money</strong><small>Cards and bank transfer too</small></div>
+        <div><strong>MTN &amp; Airtel Money</strong><small>Pay, then upload your receipt</small></div>
       </div>
     </div>
   </div>
@@ -228,7 +228,7 @@ $heroChips = array_slice($heroChips, 0, 4);
       $steps = [
         ['fa-magnifying-glass', 'Find your course', 'Browse ' . $courseCount . ' courses or search by field and level.'],
         ['fa-calendar-check', 'Enrol in an intake', 'Choose an intake date and delivery mode that suits you.'],
-        ['fa-credit-card', 'Pay securely', 'Mobile Money, card or bank transfer — confirmed quickly.'],
+        ['fa-mobile-screen-button', 'Pay by Mobile Money', 'Send your fee, upload the receipt in your portal — confirmed by our Finance office.'],
         ['fa-award', 'Learn & get certified', 'Study in your learner portal and earn a verifiable certificate.'],
       ];
       foreach ($steps as $n => [$icon, $title, $text]): ?>

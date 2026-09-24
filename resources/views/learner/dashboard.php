@@ -18,16 +18,17 @@
 
 <?php if ($pending): ?>
 <div class="panel">
-  <div class="panel-head"><h2><i class="fa-solid fa-hourglass-half"></i> Complete your enrolment</h2><a href="/learner/fees">Go to fees</a></div>
-  <div class="table-card">
+  <div class="panel-head"><h2><i class="fa-solid fa-hourglass-half"></i> Complete your enrolment</h2><a href="/learner/fees">Fees &amp; Payments</a></div>
+  <div class="table-card table-stack">
     <table>
-      <thead><tr><th>Course</th><th>Intake</th><th>Status</th></tr></thead>
+      <thead><tr><th>Course</th><th>Intake</th><th>Status</th><th></th></tr></thead>
       <tbody>
-      <?php foreach ($pending as $e): ?>
+      <?php foreach ($pending as $e): $inv = $invoices[(int) $e['id']] ?? null; ?>
         <tr>
           <td><strong><?= e($e['course_title']) ?></strong></td>
-          <td><?= e($e['intake_code']) ?></td>
-          <td><span class="status status-pending_payment">Payment pending</span></td>
+          <td data-label="Intake"><?= e($e['intake_code']) ?></td>
+          <td data-label="Status"><span class="status status-pending_payment">Payment pending</span></td>
+          <td class="cell-actions"><a href="<?= $inv ? '/learner/pay/' . (int) $inv['id'] : '/learner/fees' ?>" class="btn btn-sm btn-primary"><i class="fa-solid fa-mobile-screen-button"></i> Pay fees</a></td>
         </tr>
       <?php endforeach; ?>
       </tbody>

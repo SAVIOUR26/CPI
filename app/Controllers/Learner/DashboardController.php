@@ -11,6 +11,8 @@ use App\Models\CalendarEvent;
 use App\Models\Certificate;
 use App\Models\Enrollment;
 use App\Models\FeeLedger;
+use App\Models\Invoice;
+use App\Models\Payment;
 use App\Models\Timetable;
 
 class DashboardController extends Controller
@@ -29,6 +31,7 @@ class DashboardController extends Controller
             'pageTitle' => 'My Dashboard — CPI',
             'active' => $active,
             'pending' => $pending,
+            'invoices' => $pending ? Invoice::byEnrollment((int) $user['id']) : [],
             'certificates' => array_slice($certificates, 0, 3),
             'timetable' => array_slice($timetable, 0, 5),
             'announcements' => Announcement::forStudent((int) $user['id'], 3),
@@ -45,6 +48,7 @@ class DashboardController extends Controller
         $this->view('learner.courses', [
             'pageTitle' => 'My Courses — CPI',
             'enrollments' => $enrollments,
+            'invoices' => Invoice::byEnrollment((int) $user['id']),
         ], 'layouts.dashboard');
     }
 
@@ -79,11 +83,12 @@ class DashboardController extends Controller
     public function fees(Request $request): void
     {
         $user = $this->requireAuth();
-        $ledger = FeeLedger::forUser((int) $user['id']);
 
         $this->view('learner.fees', [
-            'pageTitle' => 'My Fees — CPI',
-            'ledger' => $ledger,
+            'pageTitle' => 'Fees & Payments — CPI',
+            'invoices' => Invoice::forUser((int) $user['id']),
+            'payments' => Payment::forUser((int) $user['id']),
+            'ledger' => FeeLedger::forUser((int) $user['id']),
         ], 'layouts.dashboard');
     }
 }

@@ -2,7 +2,7 @@
 /** @var string $heading */ /** @var string $text */ /** @var array|null $points [icon, title, text] rows */
 $points = ($points ?? null) ?: [
   ['fa-book-open-reader', 'Your courses in one place', 'Materials, quizzes, assignments and grades.'],
-  ['fa-mobile-screen-button', 'Pay the easy way', 'MTN Mobile Money, Airtel Money, card or bank transfer.'],
+  ['fa-mobile-screen-button', 'Pay the easy way', 'MTN Mobile Money or Airtel Money, then upload your receipt.'],
   ['fa-shield-halved', 'Verifiable certificates', 'QR-coded certificates employers can check online.'],
 ];
 ?>

@@ -9,6 +9,7 @@ class Upload
         'jpg' => 'image/jpeg',
         'jpeg' => 'image/jpeg',
         'png' => 'image/png',
+        'webp' => 'image/webp',
         'doc' => 'application/msword',
         'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         'xls' => 'application/vnd.ms-excel',
@@ -61,6 +62,40 @@ class Upload
         }
 
         return trim($subdir, '/') . '/' . $safeName;
+    }
+
+    /** The largest single upload the server will take, capped at $cap (upload_max_filesize and post_max_size allowing). */
+    public static function maxBytes(int $cap): int
+    {
+        $limits = [$cap];
+        $file = self::iniBytes((string) ini_get('upload_max_filesize'));
+        $post = self::iniBytes((string) ini_get('post_max_size'));
+        if ($file > 0) {
+            $limits[] = $file;
+        }
+        if ($post > 0) {
+            $limits[] = max(1, $post - 65536); // room for the other form fields
+        }
+        return min($limits);
+    }
+
+    /** "2M" → 2097152 */
+    public static function iniBytes(string $value): int
+    {
+        $value = trim($value);
+        $n = (int) $value;
+        return match (strtolower(substr($value, -1))) {
+            'g' => $n * 1024 ** 3,
+            'm' => $n * 1024 ** 2,
+            'k' => $n * 1024,
+            default => $n,
+        };
+    }
+
+    /** 2097152 → "2MB", 1572864 → "1.5MB" */
+    public static function humanSize(int $bytes): string
+    {
+        return rtrim(rtrim(number_format($bytes / 1048576, 1), '0'), '.') . 'MB';
     }
 
     public static function absolutePath(string $relativePath): string
